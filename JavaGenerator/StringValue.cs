@@ -12,7 +12,7 @@ public class StringValue : IValue
         Value = value;
     }
 
-    public string ToString(ClassDefinition classDefinition)
+    public string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
         sb.Append('\"');

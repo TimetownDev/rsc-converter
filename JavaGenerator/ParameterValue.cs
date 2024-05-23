@@ -6,7 +6,7 @@ public class ParameterValue : IValue
 {
     public int id { get; set; } = 0;
 
-    public string ToString(ClassDefinition classDefinition)
+    public string BuildContent(ClassDefinition classDefinition)
     {
         return $"param{id}";
     }

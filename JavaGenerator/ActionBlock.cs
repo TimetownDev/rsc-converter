@@ -11,7 +11,7 @@ public class ActionBlock
         StringBuilder sb = new();
         foreach (IAction action in Actions)
         {
-            sb.Append(action.ToString(classDefinition));
+            sb.Append(action.BuildContent(classDefinition));
             sb.Append(";\n");
         }
 

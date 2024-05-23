@@ -1,4 +1,5 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using rscconventer.JavaGenerator.Exceptions;
+using rscconventer.JavaGenerator.Interfaces;
 using rscconventer.JavaGenerator.Utils;
 using System.Text;
 
@@ -10,11 +11,11 @@ public class StaticInvokeAction : IAction, IValue
     public MethodDefinition MethodDefinition { get; set; }
     public IList<IValue> Parameters { get; set; } = [];
 
-    public string ToString(ClassDefinition classDefinition)
+    public string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
-        ImportUtils.Import(classDefinition.Imported, ClassDefinition);
-        sb.Append(ImportUtils.GetUsing(classDefinition.Imported, ClassDefinition));
+        classDefinition.ImportList.Import(ClassDefinition);
+        sb.Append(classDefinition.ImportList.GetUsing(ClassDefinition));
         sb.Append('.');
         sb.Append(MethodDefinition.Name);
         sb.Append('(');
@@ -22,7 +23,7 @@ public class StaticInvokeAction : IAction, IValue
         int x = 0;
         foreach (IValue parameter in Parameters)
         {
-            sb.Append(parameter.ToString(classDefinition));
+            sb.Append(parameter.BuildContent(classDefinition));
             if (x + 1 !=  Parameters.Count)
                 sb.Append(", ");
             x++;
@@ -33,6 +34,10 @@ public class StaticInvokeAction : IAction, IValue
     }
     public StaticInvokeAction(ClassDefinition classDefinition, MethodDefinition methodDefinition, params IValue[] parameters)
     {
+        if (!classDefinition.Methods.Contains(methodDefinition))
+            throw new NoSuchMethodException(methodDefinition);
+        if (!methodDefinition.IsStatic)
+            throw new InvalidOperationException("方法不是静态");
         ClassDefinition = classDefinition;
         MethodDefinition = methodDefinition;
         Parameters = parameters;

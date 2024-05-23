@@ -12,7 +12,8 @@ public static class BukkitClass
         };
         GetConsoleSender = new("getConsoleSender")
         {
-            ReturnType = ConsoleCommandSenderClass.Class
+            ReturnType = ConsoleCommandSenderClass.Class,
+            IsStatic = true
         };
         Class.Methods.Add(GetConsoleSender);
     }

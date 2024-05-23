@@ -1,4 +1,5 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using rscconventer.JavaGenerator.Exceptions;
+using rscconventer.JavaGenerator.Interfaces;
 using System.Text;
 
 namespace rscconventer.JavaGenerator;
@@ -9,10 +10,10 @@ public class ObjectInvokeAction : IAction, IValue
     public MethodDefinition MethodDefinition { get; set; }
     public IList<IValue> Parameters { get; set; } = [];
 
-    public string ToString(ClassDefinition classDefinition)
+    public string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
-        sb.Append(Value.ToString(classDefinition));
+        sb.Append(Value.BuildContent(classDefinition));
         sb.Append('.');
         sb.Append(MethodDefinition.Name);
         sb.Append('(');
@@ -20,7 +21,7 @@ public class ObjectInvokeAction : IAction, IValue
         int x = 0;
         foreach (IValue parameter in Parameters)
         {
-            sb.Append(parameter.ToString(classDefinition));
+            sb.Append(parameter.BuildContent(classDefinition));
             if (x + 1 != Parameters.Count)
                 sb.Append(", ");
             x++;
@@ -31,6 +32,8 @@ public class ObjectInvokeAction : IAction, IValue
     }
     public ObjectInvokeAction(IValue value, MethodDefinition methodDefinition, params IValue[] parameters)
     {
+        if (methodDefinition.IsStatic)
+            throw new InvalidOperationException("方法不是非静态");
         Value = value;
         MethodDefinition = methodDefinition;
         Parameters = parameters;

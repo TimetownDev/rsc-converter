@@ -1,19 +1,55 @@
 ﻿using rscconventer.JavaGenerator.Attributes;
+using rscconventer.JavaGenerator.Exceptions;
+using rscconventer.JavaGenerator.Interfaces;
 using rscconventer.JavaGenerator.Utils;
 using System.Text;
 
 namespace rscconventer.JavaGenerator;
 
-public class ClassDefinition
+public class ClassDefinition : IAccessable
 {
     private ClassDefinition? super;
+    private bool isInterface = false;
+    private bool isAbstract = false;
 
     public bool NeedGenerate { get; set; } = true;
-    public IList<ClassDefinition> Imported { get; set; } = [];
-    public IList<ClassAttribute> Attributes { get; set; } = [];
-    public AccessAttribute AccessAttribute { get; set; } = AccessAttribute.Public;
+    public ImportList ImportList { get; set; } = [];
+    public bool IsInterface
+    {
+        get
+        {
+            return isInterface;
+        }
+        set
+        {
+            if (value)
+                isAbstract = false;
+            isInterface = value;
+        }
+    }
+    public bool IsAbstract
+    {
+        get
+        {
+            return isAbstract;
+        }
+        set
+        {
+            if (value)
+                isInterface = false;
+            isAbstract = value;
+        }
+    }
+    public AccessAttribute Access { get; set; } = AccessAttribute.Public;
     public string Name { get; set; } = string.Empty;
     public Namespace Namespace { get; set; }
+    public string FullName 
+    {
+        get
+        {
+            return Namespace + "." + Name;
+        }
+    }
     public ClassDefinition? Super
     {
         get
@@ -27,7 +63,7 @@ public class ClassDefinition
                 super = value;
                 return;
             }
-            if (value == this || value.Attributes.Contains(ClassAttribute.Abstract)) return;
+            if (value == this) return;
             super = value;
         }
     }
@@ -45,7 +81,7 @@ public class ClassDefinition
         Name = name;
     }
 
-    public override string ToString()
+    public string BuildContent()
     {
         StringBuilder importBuilder = new();
         StringBuilder sb = new();
@@ -55,13 +91,13 @@ public class ClassDefinition
         importBuilder.Append('\n');
         importBuilder.Append('\n');
         // 先构建内容
-        sb.Append(AccessAttribute.ToString().ToLower());
+        sb.Append(Access.ToString().ToLower());
         sb.Append(' ');
-        if (Attributes.Contains(ClassAttribute.Interface))
+        if (IsInterface)
         {
             sb.Append("interface");
         }
-        else if (Attributes.Contains(ClassAttribute.Abstract))
+        else if (IsAbstract)
         {
             sb.Append("abstract");
             sb.Append(' ');
@@ -78,8 +114,8 @@ public class ClassDefinition
         {
             sb.Append("extends");
             sb.Append(' ');
-            ImportUtils.Import(Imported, Super);
-            sb.Append(ImportUtils.GetUsing(Imported, Super));
+            ImportList.Import(Super);
+            sb.Append(ImportList.GetUsing(Super));
             sb.Append(' ');
         }
         if (Interfaces.Count > 0)
@@ -88,8 +124,8 @@ public class ClassDefinition
             sb.Append(' ');
             sb.Append(string.Join(", ", Interfaces.Select(x =>
             {
-                ImportUtils.Import(Imported, x);
-                return ImportUtils.GetUsing(Imported, x);
+                ImportList.Import(x);
+                return ImportList.GetUsing(x);
             })));
             sb.Append(' ');
         }
@@ -97,24 +133,47 @@ public class ClassDefinition
         sb.Append('\n');
         foreach (MethodDefinition methodDefinition in Methods)
         {
-            sb.Append(methodDefinition.ToString(this));
+            sb.Append(IndentationUtils.Indente(methodDefinition.ToString(this)));
             sb.Append('\n');
         }
-        sb.Append('\n');
         sb.Append('}');
 
-        foreach (ClassDefinition classDefinition in Imported)
-        {
-            importBuilder.Append("import ");
-            importBuilder.Append(classDefinition.Namespace);
-            importBuilder.Append('.');
-            importBuilder.Append(classDefinition.Name);
-            importBuilder.Append(';');
-            importBuilder.Append('\n');
-        }
+        importBuilder.Append(ImportList.BuildContent());
+        importBuilder.Append('\n');
         importBuilder.Append('\n');
 
         return importBuilder.ToString() + sb.ToString();
+    }
+
+    public MethodDefinition? FindMethod(string name, bool throwException = false)
+    {
+        foreach (MethodDefinition method in Methods)
+        {
+            if (method.Name == name) return method;
+        }
+
+        if (throwException)
+            throw new NoSuchMethodException(name);
+
+        return null;
+    }
+
+    public StaticInvokeAction Invoke(string name, params IValue[] parameters)
+    {
+        MethodDefinition? method = FindMethod(name);
+        if (method == null || !method.IsStatic)
+            throw new NoSuchMethodException(name);
+
+        return new StaticInvokeAction(this, method, parameters);
+    }
+
+    public StaticInvokeAction Invoke(MethodDefinition method, params IValue[] parameters)
+    {
+        if (!Methods.Contains(method))
+            throw new InvalidOperationException("此方法不归本类所有");
+        if (!method.IsStatic)
+            throw new InvalidOperationException("不能直接调用非静态方法");
+        return new StaticInvokeAction(this, method, parameters);
     }
 
     public override bool Equals(object? obj)

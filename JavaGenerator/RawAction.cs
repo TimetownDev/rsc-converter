@@ -5,10 +5,11 @@ namespace rscconventer.JavaGenerator;
 public class RawAction : IAction
 {
     public string ActionText { get; set; } = string.Empty;
-    public IList<string> Imports { get; set; } = [];
+    public ImportList ImportList = [];
 
-    public string ToString(ClassDefinition classDefinition)
+    public string BuildContent(ClassDefinition classDefinition)
     {
-        throw new NotImplementedException();
+        classDefinition.ImportList.Merge(ImportList);
+        return ActionText;
     }
 }

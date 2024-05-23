@@ -2,5 +2,5 @@
 
 public interface IAction
 {
-    string ToString(ClassDefinition classDefinition);
+    string BuildContent(ClassDefinition classDefinition);
 }
