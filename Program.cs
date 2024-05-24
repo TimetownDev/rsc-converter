@@ -1,6 +1,9 @@
-﻿using rscconventer.JavaGenerator;
+﻿using rscconventer.Classes.Utils;
+using rscconventer.Classes.Yaml;
+using rscconventer.JavaGenerator;
 using rscconventer.JavaGenerator.Bukkit;
 using rscconventer.JavaGenerator.Interfaces;
+using YamlDotNet.RepresentationModel;
 
 namespace rscconventer
 {
@@ -19,8 +22,17 @@ namespace rscconventer
             methodDefinition.Block.Actions.Add(BukkitClass.Class.Invoke(BukkitClass.GetConsoleSender).Invoke(ConsoleCommandSenderClass.SendMessage, new ParameterValue(0)));
             classDefinition.Methods.Add(methodDefinition);
 
-            
             Console.WriteLine(classDefinition.BuildContent());
+            for (int i = 0; i < 4; i ++)
+            {
+                Console.WriteLine("");
+            }
+
+            YamlStream stream = new();
+            stream.Load(new StringReader("name: \"&6&l隐藏物品\"\r\nmaterial: BARRIER"));
+            YamlNode root = stream.Documents[0].RootNode;
+            IValue item = ItemReader.ReadItem(root, new(Environment.CurrentDirectory));
+            Console.WriteLine(item.BuildContent(classDefinition));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using rscconventer.Classes.Utils;
+using rscconventer.JavaGenerator.Interfaces;
 using System.Text;
 
 namespace rscconventer.JavaGenerator;
@@ -16,7 +17,7 @@ public class StringValue : IValue
     {
         StringBuilder sb = new();
         sb.Append('\"');
-        sb.Append(Value);
+        sb.Append(Value.Escape());
         sb.Append('\"');
         return sb.ToString();
     }

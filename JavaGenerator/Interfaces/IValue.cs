@@ -1,4 +1,6 @@
-﻿namespace rscconventer.JavaGenerator.Interfaces;
+﻿using System.Runtime.CompilerServices;
+
+namespace rscconventer.JavaGenerator.Interfaces;
 
 public interface IValue
 {

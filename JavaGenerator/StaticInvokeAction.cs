@@ -23,9 +23,13 @@ public class StaticInvokeAction : IAction, IValue
         int x = 0;
         foreach (IValue parameter in Parameters)
         {
-            sb.Append(parameter.BuildContent(classDefinition));
-            if (x + 1 !=  Parameters.Count)
-                sb.Append(", ");
+            string next = parameter.BuildContent(classDefinition);
+            if (next.Trim() != string.Empty)
+            {
+                if (x != 0)
+                    sb.Append(", ");
+                sb.Append(next);
+            }
             x++;
         }
         sb.Append(')');
