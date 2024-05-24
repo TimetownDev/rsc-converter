@@ -13,7 +13,7 @@ public class MethodDefinition : IStaticable, IAccessable
     public IList<ClassDefinition> ParameterTypes { get; set; } = [];
     public bool IsStatic { get; set; } = false;
     public ActionBlock Block { get; set; } = new ActionBlock();
-    public string ToString(ClassDefinition classDefinition)
+    public string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
         sb.Append(Access.ToString().ToLower());

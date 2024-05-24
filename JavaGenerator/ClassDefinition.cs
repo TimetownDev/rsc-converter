@@ -14,6 +14,7 @@ public class ClassDefinition : IAccessable
 
     public bool NeedGenerate { get; set; } = true;
     public ImportList ImportList { get; set; } = [];
+    public FieldList FieldList { get; set; } = [];
     public bool IsInterface
     {
         get
@@ -131,9 +132,15 @@ public class ClassDefinition : IAccessable
         }
         sb.Append('{');
         sb.Append('\n');
+        if (FieldList.Any())
+        {
+            sb.Append(IndentationUtils.Indente(FieldList.BuildContent(this)));
+            sb.Append('\n');
+            sb.Append('\n');
+        }
         foreach (MethodDefinition methodDefinition in Methods)
         {
-            sb.Append(IndentationUtils.Indente(methodDefinition.ToString(this)));
+            sb.Append(IndentationUtils.Indente(methodDefinition.BuildContent(this)));
             sb.Append('\n');
         }
         sb.Append('}');

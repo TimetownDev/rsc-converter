@@ -21,6 +21,7 @@ namespace rscconventer
             methodDefinition.ParameterTypes.Add(SystemClass.StringClass);
             methodDefinition.Block.Actions.Add(BukkitClass.Class.Invoke(BukkitClass.GetConsoleSender).Invoke(ConsoleCommandSenderClass.SendMessage, new ParameterValue(0)));
             classDefinition.Methods.Add(methodDefinition);
+            classDefinition.FieldList.Add(new(SystemClass.StringClass, "testStringField", new StringValue("\n")));
 
             Console.WriteLine(classDefinition.BuildContent());
             for (int i = 0; i < 4; i ++)
