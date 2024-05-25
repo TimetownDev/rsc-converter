@@ -13,13 +13,16 @@ using YamlDotNet.RepresentationModel;
 
 namespace rscconventer.Classes.Generators;
 
-public class ItemGroupGenerator : IGenerator
+public class ItemGroupGenerator : IClassGenerator
 {
-    public YamlNode Yaml { get; set; }
-    public ClassDefinition? OnGenerate(BuildSession session)
+    public IList<ClassDefinition>? OnGenerate(BuildSession session)
     {
+        YamlMappingNode resultNode = new();
+        YamlStream stream = [];
+        stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "groups.yml"))));
+        YamlMappingNode yaml = (YamlMappingNode)stream.Documents[0].RootNode;
         ClassDefinition generated = new("me.ddggdd135." + session.Name + ".items", session.Name + "ItemGroups");
-        if (Yaml is not YamlMappingNode mappingNode) return null;
+        if (yaml is not YamlMappingNode mappingNode) return null;
         foreach (KeyValuePair<YamlNode, YamlNode> pair in mappingNode) {
             YamlNode key = pair.Key;
             if (key is not YamlScalarNode scalarNode) continue;
@@ -115,10 +118,6 @@ public class ItemGroupGenerator : IGenerator
         }
         generated.Methods.Add(onSetup);
 
-        return generated;
-    }
-    public ItemGroupGenerator(YamlNode yaml)
-    {
-        Yaml = yaml;
+        return [generated];
     }
 }
