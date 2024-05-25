@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator;
+﻿namespace rscconventer.JavaGenerator.System;
 
 public static class SystemClass
 {

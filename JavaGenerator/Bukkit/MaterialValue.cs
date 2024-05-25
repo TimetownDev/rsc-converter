@@ -9,7 +9,7 @@ public class MaterialValue : IValue
 
     public string BuildContent(ClassDefinition classDefinition)
     {
-        classDefinition.ImportList.Add(MaterialClass.Class);
+        classDefinition.ImportList.Import(MaterialClass.Class);
         return classDefinition.ImportList.GetUsing(MaterialClass.Class) + "." + MaterialName.ToUpper();
     }
     public MaterialValue(string materialName)

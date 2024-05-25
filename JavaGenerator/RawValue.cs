@@ -2,18 +2,17 @@
 
 namespace rscconventer.JavaGenerator;
 
-public class RawAction : IAction
+public class RawValue : IValue
 {
-    public string ActionText { get; set; } = string.Empty;
     public ImportList ImportList = [];
-
+    public string ValueText { get; set; } = string.Empty;
     public string BuildContent(ClassDefinition classDefinition)
     {
         classDefinition.ImportList.Merge(ImportList);
-        return ActionText;
+        return ValueText;
     }
-    public RawAction(string actionText)
+    public RawValue(string valueText)
     {
-        ActionText = actionText;
+        ValueText = valueText;
     }
 }

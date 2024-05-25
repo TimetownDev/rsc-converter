@@ -22,7 +22,7 @@ public static class YamlUtils
     public static string? GetString(this YamlNode yaml, string key)
     {
         if (!yaml.Contains(key)) return null;
-        try 
+        try
         {
             YamlScalarNode node = (YamlScalarNode)yaml[key];
             return node.Value;
@@ -33,7 +33,7 @@ public static class YamlUtils
         }
     }
 
-    public static string Geting(this YamlNode yaml, string key, string @default)
+    public static string GetString(this YamlNode yaml, string key, string @default)
     {
         if (!yaml.Contains(key)) return @default;
         try
@@ -165,21 +165,71 @@ public static class YamlUtils
         }
     }
 
+    public static T GetNumber<T>(this YamlNode yaml, string key, T @default) where T : INumber<T>
+    {
+        if (!yaml.Contains(key)) return @default;
+        try
+        {
+            YamlScalarNode node = (YamlScalarNode)yaml[key];
+            if (node.Value == null) return @default;
+
+            return T.Parse(node.Value, new NumberFormatInfo());
+        }
+        catch
+        {
+            return @default;
+        }
+    }
+
     public static int GetInt(this YamlNode yaml, string key)
     {
         return yaml.GetNumber<int>(key);
     }
+    public static int GetInt(this YamlNode yaml, string key, int @default)
+    {
+        return yaml.GetNumber<int>(key, @default);
+    }
+
+    public static long GetLong(this YamlNode yaml, string key)
+    {
+        return yaml.GetNumber<long>(key);
+    }
+
+    public static long GetLong(this YamlNode yaml, string key, long @default)
+    {
+        return yaml.GetNumber<long>(key, @default);
+    }
+
+    public static float GetFloat(this YamlNode yaml, string key)
+    {
+        return yaml.GetNumber<float>(key);
+    }
+
+    public static float GetFloat(this YamlNode yaml, string key, float @default)
+    {
+        return yaml.GetNumber<float>(key, @default);
+    }
+
+    public static double GetDouble(this YamlNode yaml, string key)
+    {
+        return yaml.GetNumber<double>(key);
+    }
+
+    public static double GetDouble(this YamlNode yaml, string key, double @default)
+    {
+        return yaml.GetNumber<double>(key, @default);
+    }
 
     public static bool GetBoolean(this YamlNode yaml, string key)
     {
-        string data = yaml.Geting(key, "false");
+        string data = yaml.GetString(key, "false");
 
         return bool.Parse(data);
     }
 
     public static bool GetBoolean(this YamlNode yaml, string key, bool @default)
     {
-        string data = yaml.Geting(key, @default.ToString());
+        string data = yaml.GetString(key, @default.ToString());
 
         return bool.Parse(data);
     }

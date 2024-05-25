@@ -1,4 +1,7 @@
-﻿namespace rscconventer.JavaGenerator.GuguSlimefunLib.Items;
+﻿using rscconventer.JavaGenerator.Bukkit;
+using rscconventer.JavaGenerator.System;
+
+namespace rscconventer.JavaGenerator.GuguSlimefunLib.Items;
 
 public static class AdvancedCustomItemStackClass
 {
@@ -15,7 +18,8 @@ public static class AdvancedCustomItemStackClass
     {
         Class = new ClassDefinition("me.ddggdd135.guguslimefunlib.items", "AdvancedCustomItemStack")
         {
-            NeedGenerate = false
+            NeedGenerate = false,
+            Super = ItemStackClass.Class
         };
         FromHashCode = new("fromHashCode")
         {

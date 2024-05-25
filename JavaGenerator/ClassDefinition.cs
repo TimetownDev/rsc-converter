@@ -132,7 +132,7 @@ public class ClassDefinition : IAccessable
         }
         sb.Append('{');
         sb.Append('\n');
-        if (FieldList.Any())
+        if (FieldList.Count != 0)
         {
             sb.Append(IndentationUtils.Indente(FieldList.BuildContent(this)));
             sb.Append('\n');

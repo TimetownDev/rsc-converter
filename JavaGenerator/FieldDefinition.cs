@@ -4,7 +4,7 @@ using System.Text;
 
 namespace rscconventer.JavaGenerator;
 
-public class FieldDefinition
+public class FieldDefinition : IStaticable, IAccessable
 {
     public AccessAttribute Access { get; set; } = AccessAttribute.Public;
     public ClassDefinition Type { get; set; }
@@ -33,7 +33,7 @@ public class FieldDefinition
             sb.Append("static");
             sb.Append(' ');
         }
-        classDefinition.ImportList.Add(Type);
+        classDefinition.ImportList.Import(Type);
         sb.Append(classDefinition.ImportList.GetUsing(Type));
         sb.Append(' ');
         sb.Append(Name);

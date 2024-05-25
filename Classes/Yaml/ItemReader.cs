@@ -11,16 +11,16 @@ namespace rscconventer.Classes.Yaml;
 public static partial class ItemReader
 {
     private readonly static Regex SkullHashRegex = SkullHashRegexGenerated();
-    public static IValue ReadItem(YamlNode yaml, DirectoryInfo directory)
+    public static IValue ReadItem(this YamlNode yaml, DirectoryInfo directory)
     {
-        string type = yaml.Geting("material_type", "mc");
+        string type = yaml.GetString("material_type", "mc");
 
         if (!type.Equals("none", StringComparison.OrdinalIgnoreCase) && !yaml.Contains("material"))
         {
             throw new ArgumentException("请先设置一个材料！");
         }
 
-        string? material = yaml.Geting("material", "");
+        string? material = yaml.GetString("material", "");
 
         if (material.StartsWith("ey"))
             type = "skull";
@@ -32,7 +32,7 @@ public static partial class ItemReader
         IList<string>? lore = yaml.GetStringList("lore");
         lore ??= [];
 
-        string name = yaml.Geting("name", "");
+        string name = yaml.GetString("name", "");
         bool glow = yaml.GetBoolean("glow", false);
         bool hasEnchantment = yaml.Contains("enchantments") && yaml.IsList("enchantments");
         int modelId = yaml.GetInt("modelId");
@@ -74,6 +74,12 @@ public static partial class ItemReader
         itemStack = itemStack.Invoke(AdvancedCustomItemStackClass.AsQuantity, new NumberValue<int>(amount));
 
         return itemStack;
+    }
+    public static IValue ReadItem(this YamlNode yaml, string key, DirectoryInfo directory)
+    {
+        yaml = yaml[key];
+
+        return ReadItem(yaml, directory);
     }
 
     [GeneratedRegex("^[A-Za-z0-9]{64,}$")]
