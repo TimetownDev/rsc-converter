@@ -116,7 +116,7 @@ public class ImportList : IList<string>
             if (!Contains(fullName)) Add(fullName);
         }
     }
-    public string BuildContent()
+    public virtual string BuildContent()
     {
         StringBuilder sb = new();
 

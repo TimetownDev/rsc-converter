@@ -2,7 +2,7 @@
 using rscconventer.JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator;
+namespace rscconventer.JavaGenerator.Actions;
 
 public class ObjectInvokeAction : IAction, IValue
 {

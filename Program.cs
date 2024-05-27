@@ -1,11 +1,11 @@
 ﻿using rscconventer.Classes;
 using rscconventer.Classes.Generators;
 using rscconventer.Classes.Utils;
-using rscconventer.Classes.Yaml;
 using rscconventer.JavaGenerator;
 using rscconventer.JavaGenerator.Bukkit;
 using rscconventer.JavaGenerator.Interfaces;
 using rscconventer.JavaGenerator.System;
+using rscconventer.JavaGenerator.Values;
 using System.Text;
 using YamlDotNet.RepresentationModel;
 
@@ -28,7 +28,7 @@ namespace rscconventer
             classDefinition.FieldList.Add(new(SystemClass.StringClass, "testStringField", new StringValue("\n")));
 
             Console.WriteLine(classDefinition.BuildContent());
-            for (int i = 0; i < 4; i ++)
+            for (int i = 0; i < 4; i++)
             {
                 Console.WriteLine("");
             }
@@ -41,6 +41,8 @@ namespace rscconventer
             BuildSession session = new(new(Environment.CurrentDirectory));
             session.Name = name;
             session.ClassGenerators.Add(new ItemGroupGenerator());
+            session.ClassGenerators.Add(new RecipeTypeGenerator());
+            session.ClassGenerators.Add(new PluginMainGenerator());
             session.FileGenerators.Add(new PluginYamlGenerator());
             session.Build();
         }

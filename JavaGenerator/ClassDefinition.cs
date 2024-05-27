@@ -1,4 +1,5 @@
-﻿using rscconventer.JavaGenerator.Attributes;
+﻿using rscconventer.JavaGenerator.Actions;
+using rscconventer.JavaGenerator.Attributes;
 using rscconventer.JavaGenerator.Exceptions;
 using rscconventer.JavaGenerator.Interfaces;
 using rscconventer.JavaGenerator.Utils;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace rscconventer.JavaGenerator;
 
-public class ClassDefinition : IAccessable
+public class ClassDefinition : IAccessable, IClassDefinition
 {
     private ClassDefinition? super;
     private bool isInterface = false;
@@ -44,7 +45,7 @@ public class ClassDefinition : IAccessable
     public AccessAttribute Access { get; set; } = AccessAttribute.Public;
     public string Name { get; set; } = string.Empty;
     public Namespace Namespace { get; set; }
-    public string FullName 
+    public string FullName
     {
         get
         {
@@ -70,6 +71,7 @@ public class ClassDefinition : IAccessable
     }
     public IList<ClassDefinition> Interfaces { get; set; } = [];
     public IList<MethodDefinition> Methods { get; set; } = [];
+    public IList<CtorMethodDefinition> Ctors { get; set; } = [];
 
     public ClassDefinition(string @namespace, string name)
     {
@@ -82,7 +84,7 @@ public class ClassDefinition : IAccessable
         Name = name;
     }
 
-    public string BuildContent()
+    public virtual string BuildContent()
     {
         StringBuilder importBuilder = new();
         StringBuilder sb = new();
@@ -136,6 +138,11 @@ public class ClassDefinition : IAccessable
         {
             sb.Append(IndentationUtils.Indente(FieldList.BuildContent(this)));
             sb.Append('\n');
+            sb.Append('\n');
+        }
+        foreach (CtorMethodDefinition ctor in Ctors)
+        {
+            sb.Append(IndentationUtils.Indente(ctor.BuildContent(this)));
             sb.Append('\n');
         }
         foreach (MethodDefinition methodDefinition in Methods)

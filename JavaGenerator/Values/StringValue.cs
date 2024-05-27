@@ -2,7 +2,7 @@
 using rscconventer.JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator;
+namespace rscconventer.JavaGenerator.Values;
 
 public class StringValue : IValue
 {

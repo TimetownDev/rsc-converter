@@ -5,40 +5,17 @@ using System.Text;
 
 namespace rscconventer.JavaGenerator;
 
-public class MethodDefinition : IStaticable, IAccessable
+public class CtorMethodDefinition
 {
     public AccessAttribute Access { get; set; } = AccessAttribute.Public;
-    public string Name { get; set; } = string.Empty;
-    public IClassDefinition? ReturnType { get; set; }
     public IList<IClassDefinition> ParameterTypes { get; set; } = [];
-    public bool IsStatic { get; set; } = false;
-    public ActionBlock Block { get; set; } = new ActionBlock();
+    public ActionBlock Block { get; set; } = new();
     public virtual string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
         sb.Append(Access.ToString().ToLower());
         sb.Append(' ');
-        if (IsStatic)
-        {
-            sb.Append("static");
-            sb.Append(' ');
-        }
-        if (ReturnType == null)
-        {
-            sb.Append("void");
-        }
-        else
-        {
-            if (ReturnType is ClassDefinition returnType)
-            {
-                classDefinition.ImportList.Import(returnType);
-                sb.Append(classDefinition.ImportList.GetUsing(returnType));
-            }
-            else
-                sb.Append(ReturnType.Name);
-        }
-        sb.Append(' ');
-        sb.Append(Name);
+        sb.Append(classDefinition.Name);
         sb.Append('(');
         //我们遵循param + x的命名方式 x从0开始
         int x = 0;
@@ -59,8 +36,13 @@ public class MethodDefinition : IStaticable, IAccessable
         return sb.ToString();
     }
 
-    public MethodDefinition(string name)
+    public CtorMethodDefinition(IList<IClassDefinition> parameterTypes)
     {
-        Name = name;
+        ParameterTypes = parameterTypes;
+    }
+
+    public CtorMethodDefinition(params IClassDefinition[] parameterTypes)
+    {
+        ParameterTypes = parameterTypes.ToList();
     }
 }

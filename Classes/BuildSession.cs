@@ -55,6 +55,10 @@ public class BuildSession
             File.WriteAllBytes(path, file.Data);
         }
     }
+    public ClassDefinition? GetClassDefinition(string name)
+    {
+        return ClassDefinitions.FirstOrDefault(x => x.Name == name);
+    }
     public BuildSession(DirectoryInfo directory)
     {
         Directory = directory;

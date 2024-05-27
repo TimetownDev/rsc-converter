@@ -1,21 +1,17 @@
 ﻿using rscconventer.JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator;
+namespace rscconventer.JavaGenerator.Actions;
 
-public class NewInstanceAction : IAction, IValue
+public class SuperInvokeAction : IAction
 {
-    public ClassDefinition ClassDefinition { get; set; }
-    public IList<IValue> Parameters { get; set; } = [];
+    public IList<ClassDefinition> Parameters { get; set; } = [];
+
     public string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
-        sb.Append("new");
-        sb.Append(' ');
-        classDefinition.ImportList.Import(ClassDefinition);
-        sb.Append(classDefinition.ImportList.GetUsing(ClassDefinition));
+        sb.Append("super");
         sb.Append('(');
-
         int x = 0;
         foreach (IValue parameter in Parameters)
         {
@@ -31,10 +27,5 @@ public class NewInstanceAction : IAction, IValue
         sb.Append(')');
 
         return sb.ToString();
-    }
-    public NewInstanceAction(ClassDefinition classDefinition, params IValue[] parameters)
-    {
-        ClassDefinition = classDefinition;
-        Parameters = parameters;
     }
 }

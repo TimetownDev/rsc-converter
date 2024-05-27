@@ -6,7 +6,7 @@ namespace rscconventer.JavaGenerator;
 public class ActionBlock
 {
     public IList<IAction> Actions { get; set; } = [];
-    public string ToString(ClassDefinition classDefinition)
+    public virtual string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
         foreach (IAction action in Actions)

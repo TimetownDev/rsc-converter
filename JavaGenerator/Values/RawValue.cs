@@ -1,10 +1,10 @@
 ﻿using rscconventer.JavaGenerator.Interfaces;
 
-namespace rscconventer.JavaGenerator;
+namespace rscconventer.JavaGenerator.Values;
 
 public class RawValue : IValue
 {
-    public ImportList ImportList = [];
+    public ImportList ImportList { get; set; } = [];
     public string ValueText { get; set; } = string.Empty;
     public string BuildContent(ClassDefinition classDefinition)
     {

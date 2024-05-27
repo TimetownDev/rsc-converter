@@ -2,13 +2,14 @@
 using rscconventer.Classes.Utils;
 using rscconventer.Classes.Yaml;
 using rscconventer.JavaGenerator;
+using rscconventer.JavaGenerator.Actions;
 using rscconventer.JavaGenerator.Bukkit;
 using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
 using rscconventer.JavaGenerator.GuguSlimefunLib.Utils;
 using rscconventer.JavaGenerator.Interfaces;
 using rscconventer.JavaGenerator.Slimefun;
 using rscconventer.JavaGenerator.System;
-using System.IO;
+using rscconventer.JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
 namespace rscconventer.Classes.Generators;
@@ -17,13 +18,13 @@ public class ItemGroupGenerator : IClassGenerator
 {
     public IList<ClassDefinition>? OnGenerate(BuildSession session)
     {
-        YamlMappingNode resultNode = new();
         YamlStream stream = [];
         stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "groups.yml"))));
         YamlMappingNode yaml = (YamlMappingNode)stream.Documents[0].RootNode;
-        ClassDefinition generated = new("me.ddggdd135." + session.Name + ".items", session.Name + "ItemGroups");
+        ClassDefinition generated = new($"me.ddggdd135.{session.Name}.items", $"{char.ToUpper(session.Name[0])}{session.Name[1..]}ItemGroups");
         if (yaml is not YamlMappingNode mappingNode) return null;
-        foreach (KeyValuePair<YamlNode, YamlNode> pair in mappingNode) {
+        foreach (KeyValuePair<YamlNode, YamlNode> pair in mappingNode)
+        {
             YamlNode key = pair.Key;
             if (key is not YamlScalarNode scalarNode) continue;
             string? stringKey = scalarNode.Value;
@@ -33,7 +34,7 @@ public class ItemGroupGenerator : IClassGenerator
 
             IValue itemStack = value.ReadItem("item", session.Directory);
             string type = value.GetString("type", "");
-            IValue namespacedKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue("RykenSlimefunCustomizer"), new StringValue(stringKey));
+            IValue namespacedKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue(session.Name), new StringValue(stringKey));
 
             int tier = value.GetInt("tier", 3);
             if (tier <= 0)
@@ -48,7 +49,7 @@ public class ItemGroupGenerator : IClassGenerator
                 case "sub":
                     {
                         string parent = value.GetString("parent", "").ToLower();
-                        IValue parentKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue("RykenSlimefunCustomizer"), new StringValue(parent));
+                        IValue parentKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue(session.Name), new StringValue(parent));
                         if (!mappingNode.Contains(parent.ToLower()))
                             itemGroup = ItemGroupUtilsClass.Class.Invoke(ItemGroupUtilsClass.CreateSubItemGroup, parentKey, namespacedKey, itemStack, new NumberValue<int>(tier));
                         else
@@ -83,7 +84,7 @@ public class ItemGroupGenerator : IClassGenerator
                 case "button":
                     {
                         string parent = value.GetString("parent", "").ToLower();
-                        IValue parentKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue("RykenSlimefunCustomizer"), new StringValue(parent));
+                        IValue parentKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue(session.Name), new StringValue(parent));
                         IList<string>? actions = value.GetStringList("actions");
                         actions ??= [];
 
@@ -91,7 +92,7 @@ public class ItemGroupGenerator : IClassGenerator
                             itemGroup = ItemGroupUtilsClass.Class.Invoke(ItemGroupUtilsClass.CreateButton, parentKey, itemStack, new NumberValue<int>(tier), new MultipleValue(actions));
                         else
                             itemGroup = new NewInstanceAction(ItemGroupButtonClass.Class, namespacedKey, new RawValue(parent.ToUpper()), itemStack, new NumberValue<int>(tier), new MultipleValue(actions));
-                        itemGroupType= ItemGroupButtonClass.Class;
+                        itemGroupType = ItemGroupButtonClass.Class;
                     }
                     break;
                 default:

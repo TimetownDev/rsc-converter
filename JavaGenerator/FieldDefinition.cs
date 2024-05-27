@@ -7,23 +7,23 @@ namespace rscconventer.JavaGenerator;
 public class FieldDefinition : IStaticable, IAccessable
 {
     public AccessAttribute Access { get; set; } = AccessAttribute.Public;
-    public ClassDefinition Type { get; set; }
+    public IClassDefinition Type { get; set; }
     public string Name { get; set; } = string.Empty;
     public IValue? DefaultValue { get; set; }
     public bool IsStatic { get; set; } = false;
-    public FieldDefinition(ClassDefinition type, string name, IValue? defaultValue)
+    public FieldDefinition(IClassDefinition type, string name, IValue? defaultValue)
     {
         Type = type;
         Name = name;
         DefaultValue = defaultValue;
     }
-    public FieldDefinition(ClassDefinition type, string name)
+    public FieldDefinition(IClassDefinition type, string name)
     {
         Type = type;
         Name = name;
     }
 
-    public string BuildContent(ClassDefinition classDefinition)
+    public virtual string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
         sb.Append(Access.ToString().ToLower());
@@ -33,8 +33,14 @@ public class FieldDefinition : IStaticable, IAccessable
             sb.Append("static");
             sb.Append(' ');
         }
-        classDefinition.ImportList.Import(Type);
-        sb.Append(classDefinition.ImportList.GetUsing(Type));
+        if (Type is ClassDefinition type)
+        {
+            classDefinition.ImportList.Import(type);
+            sb.Append(classDefinition.ImportList.GetUsing(type));
+        }
+        else
+            sb.Append(Type.Name);
+
         sb.Append(' ');
         sb.Append(Name);
         if (DefaultValue != null)

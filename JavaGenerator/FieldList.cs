@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using rscconventer.JavaGenerator.Exceptions;
+using System.Collections;
 using System.Text;
 
 namespace rscconventer.JavaGenerator;
@@ -58,8 +59,8 @@ public class FieldList : IList<FieldDefinition>
     {
         for (int i = 0; i < fields.Count; i++)
         {
-            if (fields[i] == item) 
-            { 
+            if (fields[i] == item)
+            {
                 fields.RemoveAt(i);
                 return true;
             }
@@ -92,5 +93,18 @@ public class FieldList : IList<FieldDefinition>
         }
 
         return sb.ToString();
+    }
+
+    public FieldDefinition? FindField(string name, bool throwException = false)
+    {
+        foreach (FieldDefinition field in fields)
+        {
+            if (field.Name == name) return field;
+        }
+
+        if (throwException)
+            throw new NoSuchFieldException(name);
+
+        return null;
     }
 }

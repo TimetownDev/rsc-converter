@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using rscconventer.JavaGenerator.Actions;
+using System.Runtime.CompilerServices;
 
 namespace rscconventer.JavaGenerator.Interfaces;
 

@@ -52,7 +52,7 @@ public class PluginYamlGenerator : IFileGenerator
             resultNode.SetString("description", description);
         resultNode.SetString("api-version", "1.16");
         resultNode.SetStringList("authors", authors);
-        resultNode.SetString("main", $"me.ddggdd135.{name}.{name}Main");
+        resultNode.SetString("main", $"me.ddggdd135.{name}.{char.ToUpper(session.Name[0]) + session.Name[1..]}Main");
 
         stream = [];
         stream.Documents.Add(new(resultNode));
