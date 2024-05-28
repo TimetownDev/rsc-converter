@@ -38,10 +38,13 @@ namespace rscconventer
             YamlMappingNode yaml = (YamlMappingNode)stream.Documents[0].RootNode;
             string name = yaml.GetString("id", "");
             if (name.Trim() == string.Empty) throw new ArgumentException("id不能为空");
-            BuildSession session = new(new(Environment.CurrentDirectory));
-            session.Name = name;
+            BuildSession session = new(new(Environment.CurrentDirectory))
+            {
+                Name = name
+            };
             session.ClassGenerators.Add(new ItemGroupGenerator());
             session.ClassGenerators.Add(new RecipeTypeGenerator());
+            session.ClassGenerators.Add(new SimpleItemsGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());
             session.FileGenerators.Add(new PluginYamlGenerator());
             session.Build();

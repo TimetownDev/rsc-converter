@@ -22,6 +22,11 @@ public class RawClassDefinition : IClassDefinition
         return Name.GetHashCode();
     }
 
+    public string OnImport(ClassDefinition classDefinition)
+    {
+        return Name;
+    }
+
     public static bool operator ==(RawClassDefinition? a, RawClassDefinition? b)
     {
         if (a is null && b is null) return true;

@@ -3,4 +3,5 @@
 public interface IClassDefinition
 {
     public string Name { get; }
+    public string OnImport(ClassDefinition classDefinition);
 }

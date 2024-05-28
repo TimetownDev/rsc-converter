@@ -202,6 +202,12 @@ public class ClassDefinition : IAccessable, IClassDefinition
         return Name.GetHashCode() ^ Namespace.GetHashCode();
     }
 
+    public string OnImport(ClassDefinition classDefinition)
+    {
+        classDefinition.ImportList.Import(this);
+        return classDefinition.ImportList.GetUsing(this);
+    }
+
     public static bool operator ==(ClassDefinition? a, ClassDefinition? b)
     {
         if (a is null && b is null) return true;

@@ -13,7 +13,10 @@ public class MultipleValue : IValue
         int x = 0;
         foreach (IValue value in Values)
         {
-            sb.Append(value.BuildContent(classDefinition));
+            if (value == null)
+                sb.Append("null");
+            else
+                sb.Append(value.BuildContent(classDefinition));
             if (x + 1 != Values.Count)
                 sb.Append(", ");
             x++;

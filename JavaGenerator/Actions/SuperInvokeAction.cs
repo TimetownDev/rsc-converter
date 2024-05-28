@@ -5,7 +5,7 @@ namespace rscconventer.JavaGenerator.Actions;
 
 public class SuperInvokeAction : IAction
 {
-    public IList<ClassDefinition> Parameters { get; set; } = [];
+    public IList<IValue> Parameters { get; set; } = [];
 
     public string BuildContent(ClassDefinition classDefinition)
     {
@@ -27,5 +27,13 @@ public class SuperInvokeAction : IAction
         sb.Append(')');
 
         return sb.ToString();
+    }
+    public SuperInvokeAction(IList<IValue> parameters)
+    {
+        Parameters = parameters;
+    }
+    public SuperInvokeAction(params IValue[] parameters)
+    {
+        Parameters = parameters.ToList();
     }
 }

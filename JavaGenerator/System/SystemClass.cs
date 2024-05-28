@@ -4,6 +4,7 @@ public static class SystemClass
 {
     public static ClassDefinition StringClass { get; }
     public static ClassDefinition IntegerClass { get; }
+    public static ClassDefinition BooleanClass { get; }
     static SystemClass()
     {
         StringClass = new("java.lang", "String")
@@ -11,6 +12,10 @@ public static class SystemClass
             NeedGenerate = false
         };
         IntegerClass = new("java.lang", "Integer")
+        {
+            NeedGenerate = false
+        };
+        BooleanClass = new("java.lang", "Boolean")
         {
             NeedGenerate = false
         };

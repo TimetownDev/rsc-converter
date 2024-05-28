@@ -19,10 +19,9 @@ public class CtorMethodDefinition
         sb.Append('(');
         //我们遵循param + x的命名方式 x从0开始
         int x = 0;
-        foreach (ClassDefinition parameter in ParameterTypes)
+        foreach (IClassDefinition parameter in ParameterTypes)
         {
-            classDefinition.ImportList.Import(parameter);
-            sb.Append(classDefinition.ImportList.GetUsing(parameter));
+            sb.Append(parameter.OnImport(classDefinition));
             sb.Append(' ');
             sb.Append($"param{x}");
             if (x + 1 != ParameterTypes.Count)

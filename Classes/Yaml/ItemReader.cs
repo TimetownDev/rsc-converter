@@ -1,4 +1,5 @@
 ﻿using rscconventer.Classes.Utils;
+using rscconventer.JavaGenerator;
 using rscconventer.JavaGenerator.Actions;
 using rscconventer.JavaGenerator.Bukkit;
 using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
@@ -12,7 +13,7 @@ namespace rscconventer.Classes.Yaml;
 public static partial class ItemReader
 {
     private readonly static Regex SkullHashRegex = SkullHashRegexGenerated();
-    public static IValue ReadItem(this YamlNode yaml, DirectoryInfo directory)
+    public static IValue ReadItem(this YamlNode yaml, DirectoryInfo directory, ClassDefinition? itemClass = null)
     {
         string type = yaml.GetString("material_type", "mc");
 
@@ -56,7 +57,46 @@ public static partial class ItemReader
                 itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromURL, new StringValue(material), new StringValue(name), new MultipleValue(lore));
                 break;
             case "slimefun":
-                itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromSlimefunItem, new StringValue(material), new StringValue(name), new MultipleValue(lore));
+                if (itemClass == null || itemClass.FieldList.FindField(material.ToUpper()) == null)
+                {
+                    if (name != string.Empty)
+                        if (lore.Any())
+                            itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromSlimefunItem, new StringValue(material), new StringValue(name), new MultipleValue(lore));
+                        else
+                            itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromSlimefunItem, new StringValue(material), new StringValue(name));
+                    else
+                        if (lore.Any())
+                        itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromSlimefunItem, new StringValue(material), new MultipleValue(lore));
+                    else
+                        itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromSlimefunItem, new StringValue(material));
+                }
+                else
+                {
+                    RawValue slimefunItemStack = new($"{itemClass.Name}.{material.ToUpper()}");
+                    slimefunItemStack.ImportList.Import(itemClass);
+                    if (name != string.Empty)
+                    {
+                        if (lore.Any())
+                        {
+                            itemStack = new NewInstanceAction(AdvancedCustomItemStackClass.Class,  slimefunItemStack, new StringValue(name), new MultipleValue(lore));
+                        }
+                        else
+                        {
+                            itemStack = new NewInstanceAction(AdvancedCustomItemStackClass.Class, slimefunItemStack, new StringValue(name));
+                        }
+                    }
+                    else
+                    {
+                        if (lore.Any())
+                        {
+                            itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromLore, slimefunItemStack, new MultipleValue(lore));
+                        }
+                        else
+                        {
+                            itemStack = new NewInstanceAction(AdvancedCustomItemStackClass.Class, slimefunItemStack);
+                        }
+                    }
+                }
                 break;
             case "saveditem":
                 FileInfo yamlFile = new(Path.Combine(directory.FullName, "saveditems", material + ".yml"));
@@ -72,15 +112,16 @@ public static partial class ItemReader
         if (glow) itemStack = itemStack.Invoke(AdvancedCustomItemStackClass.DoGlow);
         if (modelId > 0) itemStack = itemStack.Invoke(AdvancedCustomItemStackClass.SetCustomModelData, new NumberValue<int>(modelId));
         if (amount > 64 || amount < -1) throw new ArgumentException("物品数量必须在64到0之间");
-        itemStack = itemStack.Invoke(AdvancedCustomItemStackClass.AsQuantity, new NumberValue<int>(amount));
+        if (amount != 1)
+            itemStack = itemStack.Invoke(AdvancedCustomItemStackClass.AsQuantity, new NumberValue<int>(amount));
 
         return itemStack;
     }
-    public static IValue ReadItem(this YamlNode yaml, string key, DirectoryInfo directory)
+    public static IValue ReadItem(this YamlNode yaml, string key, DirectoryInfo directory, ClassDefinition? itemClass = null)
     {
         yaml = yaml[key];
 
-        return ReadItem(yaml, directory);
+        return ReadItem(yaml, directory, itemClass);
     }
 
     [GeneratedRegex("^[A-Za-z0-9]{64,}$")]

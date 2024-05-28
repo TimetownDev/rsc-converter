@@ -10,4 +10,9 @@ public class ParamsClassDefinition : IClassDefinition
     {
         Class = classDefinition;
     }
+
+    public string OnImport(ClassDefinition classDefinition)
+    {
+        return $"{Class.OnImport(classDefinition)}...";
+    }
 }
