@@ -1,4 +1,5 @@
-﻿using rscconventer.JavaGenerator.Slimefun;
+﻿using rscconventer.JavaGenerator.GuguSlimefunLib.Script;
+using rscconventer.JavaGenerator.Slimefun;
 using rscconventer.JavaGenerator.System;
 
 namespace rscconventer.JavaGenerator.GuguSlimefunLib.Items;
@@ -14,6 +15,7 @@ public static class GuguSlimefunItemClass
     public static MethodDefinition SetDropAmount { get; }
     public static MethodDefinition SetVanilla { get; }
     public static MethodDefinition SetHidden { get; }
+    public static MethodDefinition SetEval { get; }
     public static MethodDefinition Register { get; }
     static GuguSlimefunItemClass()
     {
@@ -61,6 +63,11 @@ public static class GuguSlimefunItemClass
             ParameterTypes = [SystemClass.BooleanClass]
         };
         Class.Methods.Add(SetHidden);
+        SetEval = new("setEval")
+        {
+            ParameterTypes = [ScriptEvalClass.Class]
+        };
+        Class.Methods.Add(SetEval);
         Register = new("register")
         {
             ParameterTypes = [SlimefunAddonClass.Class]

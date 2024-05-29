@@ -15,24 +15,6 @@ namespace rscconventer
     {
         private static void Main(string[] args)
         {
-            ClassDefinition sfItem = new("io.github.thebusybiscuit.slimefun4.api.items", "SlimefunItem");
-            ClassDefinition classDefinition = new("me.ddggdd135", "testClass")
-            {
-                Super = sfItem,
-                IsAbstract = true
-            };
-            MethodDefinition methodDefinition = new("testMethod");
-            methodDefinition.ParameterTypes.Add(SystemClass.StringClass);
-            methodDefinition.Block.Actions.Add(BukkitClass.Class.Invoke(BukkitClass.GetConsoleSender).Invoke(ConsoleCommandSenderClass.SendMessage, new ParameterValue(0)));
-            classDefinition.Methods.Add(methodDefinition);
-            classDefinition.FieldList.Add(new(SystemClass.StringClass, "testStringField", new StringValue("\n")));
-
-            Console.WriteLine(classDefinition.BuildContent());
-            for (int i = 0; i < 4; i++)
-            {
-                Console.WriteLine("");
-            }
-
             YamlStream stream = [];
             stream.Load(new StringReader(File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "info.yml"))));
             YamlMappingNode yaml = (YamlMappingNode)stream.Documents[0].RootNode;
@@ -42,9 +24,12 @@ namespace rscconventer
             {
                 Name = name
             };
+            
             session.ClassGenerators.Add(new ItemGroupGenerator());
+            session.ClassGenerators.Add(new ItemsGenerator());
             session.ClassGenerators.Add(new RecipeTypeGenerator());
             session.ClassGenerators.Add(new SimpleItemsGenerator());
+            session.ClassGenerators.Add(new FoodsGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());
             session.FileGenerators.Add(new PluginYamlGenerator());
             session.Build();

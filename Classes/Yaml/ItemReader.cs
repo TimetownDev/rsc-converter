@@ -78,7 +78,7 @@ public static partial class ItemReader
                     {
                         if (lore.Any())
                         {
-                            itemStack = new NewInstanceAction(AdvancedCustomItemStackClass.Class,  slimefunItemStack, new StringValue(name), new MultipleValue(lore));
+                            itemStack = new NewInstanceAction(AdvancedCustomItemStackClass.Class, slimefunItemStack, new StringValue(name), new MultipleValue(lore));
                         }
                         else
                         {

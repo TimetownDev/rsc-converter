@@ -6,6 +6,7 @@ using rscconventer.JavaGenerator.Actions;
 using rscconventer.JavaGenerator.Attributes;
 using rscconventer.JavaGenerator.Bukkit;
 using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
+using rscconventer.JavaGenerator.GuguSlimefunLib.Script;
 using rscconventer.JavaGenerator.Interfaces;
 using rscconventer.JavaGenerator.Slimefun;
 using rscconventer.JavaGenerator.Values;
@@ -19,36 +20,16 @@ public class SimpleItemsGenerator : IClassGenerator
     {
         YamlStream stream = [];
         stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "items.yml"))));
-        YamlMappingNode yaml = (YamlMappingNode)stream.Documents[0].RootNode;
-        ClassDefinition generated = new($"me.ddggdd135.{session.Name}.items", $"{char.ToUpper(session.Name[0])}{session.Name[1..]}Items");
-        MethodDefinition onSetup = new("onSetup")
-        {
-            ParameterTypes = [SlimefunAddonClass.Class],
-            IsStatic = true
-        };
-        generated.Methods.Add(onSetup);
+        YamlMappingNode items = (YamlMappingNode)stream.Documents[0].RootNode;
+
         IList<ClassDefinition> itemClasses = [];
         ClassDefinition itemGroupClass = session.GetClassDefinition($"{char.ToUpper(session.Name[0])}{session.Name[1..]}ItemGroups")!;
         ClassDefinition recipeTypeClass = session.GetClassDefinition($"{char.ToUpper(session.Name[0])}{session.Name[1..]}RecipeTypes")!;
-        if (yaml is not YamlMappingNode mappingNode) return null;
-        foreach (KeyValuePair<YamlNode, YamlNode> pair in mappingNode)
-        {
-            YamlNode key = pair.Key;
-            if (key is not YamlScalarNode scalarNode) continue;
-            string? stringKey = scalarNode.Value;
-            if (stringKey == null) continue;
+        ClassDefinition itemsClass = session.GetClassDefinition($"{char.ToUpper(session.Name[0])}{session.Name[1..]}Items")!;
 
-            YamlNode value = pair.Value;
-
-            IValue itemStack = value.ReadItem("item", session.Directory, generated);
-
-            IValue slimefunItemStack = new NewInstanceAction(SlimefunItemStackClass.Class, new StringValue(stringKey.ToUpper()), itemStack);
-            FieldDefinition slimefunItemStackField = new(SlimefunItemStackClass.Class, stringKey.ToUpper(), slimefunItemStack)
-            {
-                IsStatic = true
-            };
-            generated.FieldList.Add(slimefunItemStackField);
-        }
+        MethodDefinition onSetup = itemsClass.FindMethod("onSetup")!;
+        if (items is not YamlMappingNode mappingNode) return null;
+        
         foreach (KeyValuePair<YamlNode, YamlNode> pair in mappingNode)
         {
             YamlNode key = pair.Key;
@@ -67,41 +48,12 @@ public class SimpleItemsGenerator : IClassGenerator
             itemClass.Ctors.Add(ctor);
 
             MethodDefinition preRegister = new("preRegister");
-            RawValue slimefunItemStackValue = new($"{char.ToUpper(session.Name[0])}{session.Name[1..]}Items.{stringKey.ToUpper()}");
-            slimefunItemStackValue.ImportList.Import(generated);
+            RawValue slimefunItemStackValue = new($"{itemsClass.Name}.{stringKey.ToUpper()}");
+            slimefunItemStackValue.ImportList.Import(itemsClass);
 
-            string? itemGroupId = value.GetString("item_group") ?? throw new ArgumentException("item_group不能为空");
-            RawValue itemGroup = new($"{char.ToUpper(session.Name[0])}{session.Name[1..]}ItemGroups.{itemGroupId.ToUpper()}");
-            itemGroup.ImportList.Import(itemGroupClass);
-            string recipeTypeId = value.GetString("recipe_type", "NULL").ToUpper();
-            RawValue recipeType;
-            FieldDefinition? recipeTypeField = recipeTypeClass.FieldList.FindField(recipeTypeId);
-            if (recipeTypeField == null)
-            {
-                recipeType = new RawValue($"{RecipeTypeClass.Class.Name}.{recipeTypeId}");
-                recipeType.ImportList.Import(RecipeTypeClass.Class);
-            }
-            else
-            {
-                recipeType = new RawValue($"{recipeTypeClass.Name}.{recipeTypeId}");
-                recipeType.ImportList.Import(recipeTypeClass);
-            }
-            IValue[] recipe = new IValue[9];
-
-            bool hasRecipe = value.Contains("recipe");
-            if (hasRecipe)
-            {
-                foreach (KeyValuePair<YamlNode, YamlNode> recipePair in ((YamlMappingNode)value["recipe"]))
-                {
-                    int index = int.Parse(((YamlScalarNode)recipePair.Key).Value!);
-                    if (index > 9)
-                        throw new ArgumentException("配方序号不能大于9");
-                    if (index <= 0)
-                        throw new ArgumentException("配方序号不能小于等于0");
-                    IValue item = value["recipe"].ReadItem(index.ToString(), session.Directory, generated);
-                    recipe[index - 1] = item;
-                }
-            }
+            IValue itemGroup = value.ReadItemGroup(itemGroupClass);
+            IValue recipeType = value.ReadRecipeType(recipeTypeClass);
+            IValue[] recipe = value.ReadRecipe(session.Directory, itemClass);
 
             bool placeable = value.GetBoolean("placeable", true);
             if (!placeable)
@@ -200,18 +152,20 @@ public class SimpleItemsGenerator : IClassGenerator
                 preRegister.Block.Actions.Add(new ThisValue().Invoke(GuguSlimefunItemClass.SetHidden, new BoolValue(isHidden)));
             }
 
+            bool hasScript = value.Contains("script");
+            if (hasScript)
+            {
+                string scriptFileName = value.GetString("script")!;
+                string script = File.ReadAllText(Path.Combine(session.Directory.FullName, "scripts", scriptFileName + ".js"));
+                preRegister.Block.Actions.Add(new ThisValue().Invoke(GuguSlimefunItemClass.SetEval, new NewInstanceAction(JavaScriptEvalClass.Class, new StringValue(script))));
+            }
+
             itemClass.Methods.Add(preRegister);
 
             itemClasses.Add(itemClass);
             onSetup.Block.Actions.Add(new NewInstanceAction(itemClass, itemGroup, slimefunItemStackValue, recipeType, new MultipleValue(recipe)).Invoke(GuguSlimefunItemClass.Register, new ParameterValue(0)));
         }
-        IList<ClassDefinition> result = [];
-        foreach (ClassDefinition classDefinition in itemClasses)
-        {
-            result.Add(classDefinition);
-        }
-        result.Add(generated);
 
-        return result;
+        return itemClasses;
     }
 }
