@@ -28,8 +28,8 @@ public class SimpleItemsGenerator : IClassGenerator
         ClassDefinition itemsClass = session.GetClassDefinition($"{char.ToUpper(session.Name[0])}{session.Name[1..]}Items")!;
 
         MethodDefinition onSetup = itemsClass.FindMethod("onSetup")!;
+
         if (items is not YamlMappingNode mappingNode) return null;
-        
         foreach (KeyValuePair<YamlNode, YamlNode> pair in mappingNode)
         {
             YamlNode key = pair.Key;
@@ -53,7 +53,7 @@ public class SimpleItemsGenerator : IClassGenerator
 
             IValue itemGroup = value.ReadItemGroup(itemGroupClass);
             IValue recipeType = value.ReadRecipeType(recipeTypeClass);
-            IValue[] recipe = value.ReadRecipe(session.Directory, itemClass);
+            IValue[] recipe = value.ReadRecipe(session.Directory, itemsClass);
 
             bool placeable = value.GetBoolean("placeable", true);
             if (!placeable)
@@ -119,7 +119,7 @@ public class SimpleItemsGenerator : IClassGenerator
                 {
                     RawValue rainbowTypeValue = new($"{RainbowTypeClass.Class.Name}.{rainbowType}");
                     rainbowTypeValue.ImportList.Import(RainbowTypeClass.Class);
-                    preRegister.Block.Actions.Add(new ThisValue().Invoke(GuguSlimefunItemClass.SetRainbowType, new NewInstanceAction(RainbowTypeClass.Class, rainbowTypeValue)));
+                    preRegister.Block.Actions.Add(new ThisValue().Invoke(GuguSlimefunItemClass.SetRainbowType, rainbowTypeValue));
                 }
             }
 
@@ -132,7 +132,7 @@ public class SimpleItemsGenerator : IClassGenerator
             bool canDropFrom = value.Contains("drop_from");
             if (canDropFrom)
             {
-                string dropFrom = value.GetString("drop_from")!;
+                string dropFrom = value.GetString("drop_from")!.ToUpper();
                 int dropChance = value.GetInt("drop_chance", 100);
                 int dropAmount = value.GetInt("drop_amount", 1);
                 preRegister.Block.Actions.Add(new ThisValue().Invoke(GuguSlimefunItemClass.SetDropFrom, new StringValue(dropFrom)));

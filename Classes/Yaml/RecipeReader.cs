@@ -15,7 +15,7 @@ namespace rscconventer.Classes.Yaml;
 
 public static class RecipeReader
 {
-    public static IValue[] ReadRecipe(this YamlNode yaml, DirectoryInfo directory, ClassDefinition itemClass)
+    public static IValue[] ReadRecipe(this YamlNode yaml, DirectoryInfo directory, ClassDefinition itemsClass)
     {
         IValue[] recipe = new IValue[9];
 
@@ -29,7 +29,7 @@ public static class RecipeReader
                     throw new ArgumentException("配方序号不能大于9");
                 if (index <= 0)
                     throw new ArgumentException("配方序号不能小于等于0");
-                IValue item = yaml["recipe"].ReadItem(index.ToString(), directory, itemClass);
+                IValue item = yaml["recipe"].ReadItem(index.ToString(), directory, itemsClass);
                 recipe[index - 1] = item;
             }
         }

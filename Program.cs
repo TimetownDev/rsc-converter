@@ -24,10 +24,11 @@ namespace rscconventer
             {
                 Name = name
             };
-            
-            session.ClassGenerators.Add(new ItemGroupGenerator());
+
             session.ClassGenerators.Add(new ItemsGenerator());
+            session.ClassGenerators.Add(new ItemGroupGenerator());
             session.ClassGenerators.Add(new RecipeTypeGenerator());
+            session.ClassGenerators.Add(new GEOResourceGenerator());
             session.ClassGenerators.Add(new SimpleItemsGenerator());
             session.ClassGenerators.Add(new FoodsGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());

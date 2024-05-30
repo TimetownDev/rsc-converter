@@ -52,7 +52,7 @@ public class FoodsGenerator : IClassGenerator
 
             IValue itemGroup = value.ReadItemGroup(itemGroupClass);
             IValue recipeType = value.ReadRecipeType(recipeTypeClass);
-            IValue[] recipe = value.ReadRecipe(session.Directory, itemClass);
+            IValue[] recipe = value.ReadRecipe(session.Directory, itemsClass);
 
             bool hasScript = value.Contains("script");
             if (hasScript)

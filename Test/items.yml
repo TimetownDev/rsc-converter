@@ -1,0 +1,88 @@
+RSC_EXAMPLE_ITEM:
+  item_group: rsc_example_sub_group
+  item:
+    name: "&a示例物品"
+    material: DIAMOND
+  recipe_type: ENHANCED_CRAFTING_TABLE  
+  recipe:
+    1:
+      material: APPLE
+      amount: 1
+RSC_EXAMPLE_ITEM_2:
+  item_group: rsc_example_normal_group
+  item:
+    name: "&a示例物品2"
+    material: NETHERITE_INGOT
+  recipe_type: ENHANCED_CRAFTING_TABLE  
+  script: example_script_item
+  recipe:
+    1:
+      material_type: slimefun
+      material: RSC_EXAMPLE_ITEM
+RSC_EXAMPLE_ITEM_3:
+  item_group: rsc_example_normal_group
+  item:
+    name: "&a示例物品3"
+    material: GOLD_INGOT
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  energy_capacity: 1000
+  script: example_chargeable_item
+  recipe:
+    1:
+      material_type: slimefun
+      material: RSC_EXAMPLE_ITEM_2
+RSC_SYNTHETIC_STONE:
+  item_group: rsc_example_sub_group
+  placeable: false
+  item:
+    name: "&7人造石头"
+    material: STONE
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material: COBBLESTONE
+    2:
+      material: COBBLESTONE
+    4:
+      material_type: slimefun
+      material: STONE_CHUNK
+    5:    
+      material_type: slimefun
+      material: STONE_CHUNK
+  vanilla: true
+RSC_WITHER_PROOF_STONE:
+  item_group: rsc_example_sub_group
+  item:
+    name: "&7&l防凋零石头"
+    material: STONE
+  anti_wither: true  
+  recipe_type: ENHANCED_CRAFTING_TABLE
+  recipe:
+    1:
+      material: COBBLESTONE
+    2:
+      material: COBBLESTONE
+    3:
+      material: STONE
+RSC_CHANGEABLE_DIRT:
+  item_group: rsc_example_normal_group
+  item:
+    name: "&6&l可变泥土"
+    material: DIRT
+  piglin_trade_chance: 10
+  drop_from: DIRT
+  drop_chance: 10
+  drop_amount: 1
+  rainbow: CUSTOM
+  rainbow_materials:
+    - DIRT      
+    - GRASS_BLOCK
+    - PODZOL  
+RSC_HIDDEN_ITEM:
+  item_group: rsc_example_normal_group
+  item:
+    name: "&6&l隐藏物品"
+    material: BARRIER
+  piglin_trade_chance: 10
+  hidden: true
+  radiation: VERY_DEADLY

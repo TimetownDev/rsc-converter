@@ -1,0 +1,6 @@
+RSC_EXAMPLE_RECIPE_TYPE:
+  material: "DIAMOND_BLOCK"
+  name: "&e示例配方类型"
+RSC_EXAMPLE_MULTIBLOCK_MACHINE_RECIPE_TYPE:
+  name: "&b示例多方块机器"
+  material: CRAFTING_TABLE

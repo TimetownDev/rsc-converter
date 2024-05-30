@@ -18,6 +18,8 @@ public class ItemsGenerator : IClassGenerator
         YamlMappingNode items = (YamlMappingNode)stream.Documents[0].RootNode;
         stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "foods.yml"))));
         YamlMappingNode foods = (YamlMappingNode)stream.Documents[0].RootNode;
+        stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "geo_resources.yml"))));
+        YamlMappingNode geos = (YamlMappingNode)stream.Documents[0].RootNode;
 
         ClassDefinition generated = new($"me.ddggdd135.{session.Name}.items", $"{char.ToUpper(session.Name[0])}{session.Name[1..]}Items");
         MethodDefinition onSetup = new("onSetup")
@@ -49,6 +51,26 @@ public class ItemsGenerator : IClassGenerator
 
         if (foods is not YamlMappingNode foodsMappingNode) return null;
         foreach (KeyValuePair<YamlNode, YamlNode> pair in foodsMappingNode)
+        {
+            YamlNode key = pair.Key;
+            if (key is not YamlScalarNode scalarNode) continue;
+            string? stringKey = scalarNode.Value;
+            if (stringKey == null) continue;
+
+            YamlNode value = pair.Value;
+
+            IValue itemStack = value.ReadItem("item", session.Directory, generated);
+
+            IValue slimefunItemStack = new NewInstanceAction(SlimefunItemStackClass.Class, new StringValue(stringKey.ToUpper()), itemStack);
+            FieldDefinition slimefunItemStackField = new(SlimefunItemStackClass.Class, stringKey.ToUpper(), slimefunItemStack)
+            {
+                IsStatic = true
+            };
+            generated.FieldList.Add(slimefunItemStackField);
+        }
+
+        if (geos is not YamlMappingNode geosMappingNode) return null;
+        foreach (KeyValuePair<YamlNode, YamlNode> pair in geosMappingNode)
         {
             YamlNode key = pair.Key;
             if (key is not YamlScalarNode scalarNode) continue;

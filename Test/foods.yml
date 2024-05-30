@@ -1,0 +1,21 @@
+RSC_EXAMPLE_FOOD:
+  item_group: rsc_example_sub_group
+  item:
+    name: "食物 1"
+    material: rotten_flesh
+  script: "example_food"
+  nutrition: 1
+  saturation: 0
+  eatseconds: 1.6
+  always_eatable: false
+  recipe_type: MAGIC_WORKBENCH
+  recipe:
+    1:
+      material: birch_planks
+      amount: 1
+    2:
+      material: birch_planks
+      amount: 1
+    3:
+      material: dark_oak_planks
+      amount: 1
