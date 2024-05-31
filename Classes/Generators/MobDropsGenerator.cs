@@ -19,7 +19,7 @@ public class MobDropsGenerator : IClassGenerator
 {
     public IList<ClassDefinition>? OnGenerate(BuildSession session)
     {
-        ClassDefinition generated = new($"me.ddggdd135.{session.Name}.geos", $"{char.ToUpper(session.Name[0])}{session.Name[1..]}MobDrops");
+        ClassDefinition generated = new($"me.ddggdd135.{session.Name}.mobDrops", $"{char.ToUpper(session.Name[0])}{session.Name[1..]}MobDrops");
 
         YamlStream stream = [];
         stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "mob_drops.yml"))));
