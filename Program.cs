@@ -1,11 +1,6 @@
 ﻿using rscconventer.Classes;
 using rscconventer.Classes.Generators;
 using rscconventer.Classes.Utils;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.System;
-using rscconventer.JavaGenerator.Values;
 using System.Text;
 using YamlDotNet.RepresentationModel;
 
@@ -29,6 +24,7 @@ namespace rscconventer
             session.ClassGenerators.Add(new ItemGroupGenerator());
             session.ClassGenerators.Add(new RecipeTypeGenerator());
             session.ClassGenerators.Add(new GEOResourceGenerator());
+            session.ClassGenerators.Add(new MobDropsGenerator());
             session.ClassGenerators.Add(new SimpleItemsGenerator());
             session.ClassGenerators.Add(new FoodsGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());

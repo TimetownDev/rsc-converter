@@ -15,6 +15,7 @@ public static class AdvancedCustomItemStackClass
     public static MethodDefinition Parse { get; }
     public static MethodDefinition FromSlimefunItem { get; }
     public static MethodDefinition FromLore { get; }
+    public static MethodDefinition MakeChanceLore { get; }
     static AdvancedCustomItemStackClass()
     {
         Class = new ClassDefinition("me.ddggdd135.guguslimefunlib.items", "AdvancedCustomItemStack")
@@ -87,5 +88,12 @@ public static class AdvancedCustomItemStackClass
             ParameterTypes = [ItemStackClass.Class, new ParamsClassDefinition(SystemClass.StringClass)]
         };
         Class.Methods.Add(FromLore);
+        MakeChanceLore = new("makeChanceLore")
+        {
+            ReturnType = SystemClass.StringClass,
+            IsStatic = true,
+            ParameterTypes = [EntityTypeClass.Class, SystemClass.IntegerClass]
+        };
+        Class.Methods.Add(MakeChanceLore);
     }
 }
