@@ -1,7 +1,6 @@
-﻿using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.Slimefun;
+namespace JavaGenerator.Slimefun;
 
 public static class ProtectionTypeClass
 {
@@ -16,7 +15,7 @@ public static class ProtectionTypeClass
         ValueOf = new("valueOf")
         {
             IsStatic = true,
-            ReturnType = ProtectionTypeClass.Class,
+            ReturnType = Class,
             ParameterTypes = [SystemClass.StringClass]
         };
         Class.Methods.Add(ValueOf);

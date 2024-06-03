@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace rscconventer.Classes.Utils;
+namespace Classes.Utils;
 
 public static class PomUtils
 {
@@ -9,7 +9,7 @@ public static class PomUtils
         XmlNode projectNode = pom.GetElementsByTagName("project")[0]!;
         // 创建 <repositories> 元素
         XmlNode? repositoriesNode = pom.GetElementsByTagName("repositories")[0];
-        if (repositoriesNode == null )
+        if (repositoriesNode == null)
         {
             repositoriesNode = pom.CreateElement("repositories");
             projectNode.AppendChild(repositoriesNode);
@@ -128,13 +128,13 @@ public static class PomUtils
         projectNode.AppendChild(buildNode);
 
         // 添加 maven-compiler-plugin
-        AddPlugin(pom, "org.apache.maven.plugins", "maven-compiler-plugin", "3.12.1", @"
+        pom.AddPlugin("org.apache.maven.plugins", "maven-compiler-plugin", "3.12.1", @"
               <source>16</source>
               <target>16</target>
         ");
 
         // 添加 spotless-maven
-        AddPlugin(pom, "com.diffplug.spotless", "spotless-maven-plugin", "2.43.0", @"
+        pom.AddPlugin("com.diffplug.spotless", "spotless-maven-plugin", "2.43.0", @"
               <java>
                   <palantirJavaFormat>
                       <version>2.38.0</version>

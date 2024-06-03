@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator;
+﻿namespace JavaGenerator;
 
 public class Namespace
 {

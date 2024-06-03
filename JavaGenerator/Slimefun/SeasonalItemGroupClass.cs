@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.Slimefun;
+﻿namespace JavaGenerator.Slimefun;
 
 public static class SeasonalItemGroupClass
 {

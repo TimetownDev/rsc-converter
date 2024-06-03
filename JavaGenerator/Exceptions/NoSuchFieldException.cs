@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace rscconventer.JavaGenerator.Exceptions;
+﻿namespace JavaGenerator.Exceptions;
 
 public class NoSuchFieldException : Exception
 {
-    public string? FieldName  { get; private set; }
+    public string? FieldName { get; private set; }
     public FieldDefinition? Field { get; private set; }
     public NoSuchFieldException(string message, string fieldName) : base(message)
     {

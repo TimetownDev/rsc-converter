@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.Exceptions;
+﻿namespace JavaGenerator.Exceptions;
 
 public class NoSuchMethodException : Exception
 {

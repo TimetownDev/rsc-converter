@@ -1,12 +1,10 @@
-﻿using rscconventer.Classes.Utils;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.Values;
-using YamlDotNet.Core.Tokens;
+﻿using Classes.Utils;
+using JavaGenerator;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Yaml;
+namespace Classes.Yaml;
 
 public static class ItemGroupReader
 {

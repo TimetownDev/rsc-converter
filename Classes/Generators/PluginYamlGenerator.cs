@@ -1,11 +1,10 @@
-﻿using rscconventer.Classes.Interfaces;
-using rscconventer.Classes.Utils;
+﻿using Classes.Interfaces;
+using Classes.Utils;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Generators;
+namespace Classes.Generators;
 
 public class PluginYamlGenerator : IFileGenerator
 {
@@ -23,7 +22,7 @@ public class PluginYamlGenerator : IFileGenerator
         string displayName = yaml.GetString("name", name);
         IList<string> dependencies = ["GuguSlimefunLib", "Slimefun"];
         IList<string>? depends = yaml.GetStringList("depends");
-        if (depends !=  null)
+        if (depends != null)
         {
             foreach (string depend in depends)
             {
@@ -34,7 +33,7 @@ public class PluginYamlGenerator : IFileGenerator
         if (pluginDepends != null)
         {
             foreach (string pluginDepend in pluginDepends)
-            { 
+            {
                 dependencies.Add(pluginDepend);
             }
         }
@@ -118,7 +117,7 @@ public class PluginYamlGenerator : IFileGenerator
         pom.AddDependency("com.github.SlimefunGuguProject", "Slimefun4", "dev-SNAPSHOT");
         pom.AddDependency("com.github.TimetownDev", "GuguSlimefunLib", "edbbee0b56");
 
-        using MemoryStream pomStream  = new();
+        using MemoryStream pomStream = new();
         pom.Save(pomStream);
         result.Add(new("pom.xml", "", pomStream.ToArray()));
         #endregion

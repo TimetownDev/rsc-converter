@@ -1,11 +1,8 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Numerics;
-using YamlDotNet.Core.Tokens;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Utils;
+namespace Classes.Utils;
 
 public static class YamlUtils
 {
@@ -75,7 +72,7 @@ public static class YamlUtils
 
     public static string[]? GetStringArray(this YamlNode yaml, string key)
     {
-        IList<string>? list = GetStringList(yaml, key);
+        IList<string>? list = yaml.GetStringList(key);
 
         return list == null ? null : [.. list];
     }
@@ -93,7 +90,7 @@ public static class YamlUtils
                 {
                     try
                     {
-                        list.Add(T.Parse(scalarNode.Value, System.Globalization.NumberStyles.Number, new NumberFormatInfo()));
+                        list.Add(T.Parse(scalarNode.Value, NumberStyles.Number, new NumberFormatInfo()));
                     }
                     catch { }
                 }
@@ -191,7 +188,7 @@ public static class YamlUtils
     }
     public static int GetInt(this YamlNode yaml, string key, int @default)
     {
-        return yaml.GetNumber<int>(key, @default);
+        return yaml.GetNumber(key, @default);
     }
 
     public static long GetLong(this YamlNode yaml, string key)
@@ -201,7 +198,7 @@ public static class YamlUtils
 
     public static long GetLong(this YamlNode yaml, string key, long @default)
     {
-        return yaml.GetNumber<long>(key, @default);
+        return yaml.GetNumber(key, @default);
     }
 
     public static float GetFloat(this YamlNode yaml, string key)
@@ -211,7 +208,7 @@ public static class YamlUtils
 
     public static float GetFloat(this YamlNode yaml, string key, float @default)
     {
-        return yaml.GetNumber<float>(key, @default);
+        return yaml.GetNumber(key, @default);
     }
 
     public static double GetDouble(this YamlNode yaml, string key)
@@ -221,7 +218,7 @@ public static class YamlUtils
 
     public static double GetDouble(this YamlNode yaml, string key, double @default)
     {
-        return yaml.GetNumber<double>(key, @default);
+        return yaml.GetNumber(key, @default);
     }
 
     public static bool GetBoolean(this YamlNode yaml, string key)
@@ -263,46 +260,46 @@ public static class YamlUtils
 
     public static void SetIntList(this YamlNode yaml, string key, IList<int> values)
     {
-        yaml.SetNumberList<int>(key, values);
+        yaml.SetNumberList(key, values);
     }
 
     public static void SetLongList(this YamlNode yaml, string key, IList<long> values)
     {
-        yaml.SetNumberList<long>(key, values);
+        yaml.SetNumberList(key, values);
     }
 
     public static void SetFloatList(this YamlNode yaml, string key, IList<float> values)
     {
-        yaml.SetNumberList<float>(key, values);
+        yaml.SetNumberList(key, values);
     }
 
     public static void SetDoubleList(this YamlNode yaml, string key, IList<double> values)
     {
-        yaml.SetNumberList<double>(key, values);
+        yaml.SetNumberList(key, values);
     }
 
     public static void SetNumberArray<T>(this YamlNode yaml, string key, T[] values) where T : INumber<T>
     {
-        yaml.SetNumberList<T>(key, values);
+        yaml.SetNumberList(key, values);
     }
     public static void SetIntArray(this YamlNode yaml, string key, int[] values)
     {
-        yaml.SetNumberArray<int>(key, values);
+        yaml.SetNumberArray(key, values);
     }
 
     public static void SetLongArray(this YamlNode yaml, string key, long[] values)
     {
-        yaml.SetNumberArray<long>(key, values);
+        yaml.SetNumberArray(key, values);
     }
 
     public static void SetFloatArray(this YamlNode yaml, string key, float[] values)
     {
-        yaml.SetNumberArray<float>(key, values);
+        yaml.SetNumberArray(key, values);
     }
 
     public static void SetDoubleArray(this YamlNode yaml, string key, double[] values)
     {
-        yaml.SetNumberArray<double>(key, values);
+        yaml.SetNumberArray(key, values);
     }
 
     public static void SetNumber<T>(this YamlNode yaml, string key, T value) where T : INumber<T>
@@ -312,22 +309,22 @@ public static class YamlUtils
 
     public static void SetInt(this YamlNode yaml, string key, int value)
     {
-        yaml.SetNumber<int>(key, value);
+        yaml.SetNumber(key, value);
     }
 
     public static void SetLong(this YamlNode yaml, string key, long value)
     {
-        yaml.SetNumber<long>(key, value);
+        yaml.SetNumber(key, value);
     }
 
     public static void SetFloat(this YamlNode yaml, string key, float value)
     {
-        yaml.SetNumber<float>(key, value);
+        yaml.SetNumber(key, value);
     }
 
     public static void SetDouble(this YamlNode yaml, string key, double value)
     {
-        yaml.SetNumber<double>(key, value);
+        yaml.SetNumber(key, value);
     }
 
     public static void SetBoolean(this YamlNode yaml, string key, bool value)

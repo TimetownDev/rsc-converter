@@ -1,6 +1,6 @@
-﻿using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.Bukkit;
+namespace JavaGenerator.Bukkit;
 
 public static class ConsoleCommandSenderClass
 {

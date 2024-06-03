@@ -1,4 +1,4 @@
-﻿namespace rscconventer.Classes.Interfaces;
+﻿namespace Classes.Interfaces;
 
 public interface IFileGenerator
 {

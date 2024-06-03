@@ -1,7 +1,6 @@
-﻿using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 
-namespace rscconventer.JavaGenerator.Slimefun;
+namespace JavaGenerator.Slimefun;
 
 public class ProtectionTypeValue : IValue
 {

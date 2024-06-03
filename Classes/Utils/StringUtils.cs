@@ -1,4 +1,4 @@
-﻿namespace rscconventer.Classes.Utils;
+﻿namespace Classes.Utils;
 
 public static class StringUtils
 {

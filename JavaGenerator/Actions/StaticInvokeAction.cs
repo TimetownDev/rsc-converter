@@ -1,9 +1,8 @@
-﻿using rscconventer.JavaGenerator.Exceptions;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Utils;
+﻿using JavaGenerator.Exceptions;
+using JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator.Actions;
+namespace JavaGenerator.Actions;
 
 public class StaticInvokeAction : IAction, IValue
 {

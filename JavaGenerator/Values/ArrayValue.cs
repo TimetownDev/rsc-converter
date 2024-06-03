@@ -1,7 +1,7 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator.Values;
+namespace JavaGenerator.Values;
 
 public class ArrayValue : IValue
 {

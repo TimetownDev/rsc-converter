@@ -1,8 +1,8 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 using System.Collections;
 using System.Text;
 
-namespace rscconventer.JavaGenerator;
+namespace JavaGenerator;
 
 public class ImportList : IList<string>
 {

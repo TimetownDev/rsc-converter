@@ -1,7 +1,7 @@
-﻿using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.Bukkit;
+using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.GuguSlimefunLib.Items;
+namespace JavaGenerator.GuguSlimefunLib.Items;
 
 public static class AdvancedCustomItemStackClass
 {
@@ -25,65 +25,65 @@ public static class AdvancedCustomItemStackClass
         };
         FromHashCode = new("fromHashCode")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             IsStatic = true,
             ParameterTypes = [SystemClass.StringClass, SystemClass.StringClass, SystemClass.StringClass],
         };
         Class.Methods.Add(FromHashCode);
         FromBase64 = new("fromBase64")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             IsStatic = true,
             ParameterTypes = [SystemClass.StringClass, SystemClass.StringClass, SystemClass.StringClass]
         };
         Class.Methods.Add(FromBase64);
         FromURL = new("fromURL")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             IsStatic = true,
             ParameterTypes = [SystemClass.StringClass, SystemClass.StringClass, SystemClass.StringClass]
         };
         Class.Methods.Add(FromURL);
         DoGlow = new("doGlow")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class
+            ReturnType = Class
         };
         Class.Methods.Add(DoGlow);
         SetCustomModelData = new("setCustomModelData")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             ParameterTypes = [SystemClass.IntegerClass]
         };
         Class.Methods.Add(SetCustomModelData);
         SetCustomModelData = new("setCustomModelData")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             ParameterTypes = [SystemClass.IntegerClass]
         };
         Class.Methods.Add(SetCustomModelData);
         AsQuantity = new("asQuantity")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             ParameterTypes = [SystemClass.IntegerClass]
         };
         Class.Methods.Add(AsQuantity);
         Parse = new("parse")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             IsStatic = true,
             ParameterTypes = [SystemClass.StringClass]
         };
         Class.Methods.Add(Parse);
         FromSlimefunItem = new("fromSlimefunItem")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             IsStatic = true,
             ParameterTypes = [SystemClass.StringClass, SystemClass.StringClass, new ParamsClassDefinition(SystemClass.StringClass)]
         };
         Class.Methods.Add(FromSlimefunItem);
         FromLore = new("fromLore")
         {
-            ReturnType = AdvancedCustomItemStackClass.Class,
+            ReturnType = Class,
             IsStatic = true,
             ParameterTypes = [ItemStackClass.Class, new ParamsClassDefinition(SystemClass.StringClass)]
         };

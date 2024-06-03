@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.GuguSlimefunLib.Items;
+﻿namespace JavaGenerator.GuguSlimefunLib.Items;
 
 public static class GuguSlimefunArmorPieceClass
 {

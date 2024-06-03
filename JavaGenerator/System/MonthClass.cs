@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.System;
+﻿namespace JavaGenerator.System;
 
 public static class MonthClass
 {
@@ -13,7 +13,7 @@ public static class MonthClass
         Of = new("of")
         {
             IsStatic = true,
-            ReturnType = MonthClass.Class,
+            ReturnType = Class,
             ParameterTypes = [SystemClass.IntegerClass]
         };
         Class.Methods.Add(Of);

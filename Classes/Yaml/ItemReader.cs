@@ -1,10 +1,10 @@
-﻿using rscconventer.Classes.Utils;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Values;
+﻿using Classes.Utils;
+using JavaGenerator;
+using JavaGenerator.Actions;
+using JavaGenerator.Bukkit;
+using JavaGenerator.GuguSlimefunLib.Items;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Values;
 using System.Text.RegularExpressions;
 using YamlDotNet.RepresentationModel;
 

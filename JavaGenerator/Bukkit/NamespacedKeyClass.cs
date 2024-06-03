@@ -1,6 +1,6 @@
-﻿using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.Bukkit;
+namespace JavaGenerator.Bukkit;
 
 public static class NamespacedKeyClass
 {
@@ -15,7 +15,7 @@ public static class NamespacedKeyClass
         FromString = new MethodDefinition("fromString")
         {
             IsStatic = true,
-            ReturnType = NamespacedKeyClass.Class,
+            ReturnType = Class,
             ParameterTypes = [SystemClass.StringClass]
         };
         Class.Methods.Add(FromString);

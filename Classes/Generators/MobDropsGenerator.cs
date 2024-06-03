@@ -1,19 +1,18 @@
-﻿using rscconventer.Classes.Interfaces;
-using rscconventer.Classes.Utils;
-using rscconventer.Classes.Yaml;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Attributes;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Script;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.System;
-using rscconventer.JavaGenerator.Values;
+﻿using Classes.Interfaces;
+using Classes.Utils;
+using Classes.Yaml;
+using JavaGenerator;
+using JavaGenerator.Actions;
+using JavaGenerator.Attributes;
+using JavaGenerator.Bukkit;
+using JavaGenerator.GuguSlimefunLib.Items;
+using JavaGenerator.GuguSlimefunLib.Script;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Slimefun;
+using JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Generators;
+namespace Classes.Generators;
 
 public class MobDropsGenerator : IClassGenerator
 {
@@ -72,7 +71,7 @@ public class MobDropsGenerator : IClassGenerator
 
             itemClass.Methods.Add(preRegister);
 
-            String entityType = value.GetString("entity")!;
+            string entityType = value.GetString("entity")!;
             RawValue entity = new($"{EntityTypeClass.Class.Name}.{entityType.ToUpper()}");
             entity.ImportList.Import(EntityTypeClass.Class);
             itemClass.FieldList.Add(new(EntityTypeClass.Class, "entity", entity)
@@ -81,7 +80,7 @@ public class MobDropsGenerator : IClassGenerator
             });
 
             IValue material = new MaterialValue($"{entityType.ToUpper()}_SPAWN_EGG");
-            IValue[] recipe = [null, null, null, new NewInstanceAction(AdvancedCustomItemStackClass.Class, material)];
+            IValue?[] recipe = [null, null, null, new NewInstanceAction(AdvancedCustomItemStackClass.Class, material)];
             RawValue recipeType = new($"{RecipeTypeClass.Class.Name}.MOB_DROP");
             recipeType.ImportList.Import(RecipeTypeClass.Class);
             int chance = value.GetInt("chance")!;

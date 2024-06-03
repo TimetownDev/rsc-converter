@@ -1,7 +1,7 @@
-﻿using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.Bukkit;
+using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.GuguSlimefunLib.Items;
+namespace JavaGenerator.GuguSlimefunLib.Items;
 
 public static class SupplyInfoClass
 {

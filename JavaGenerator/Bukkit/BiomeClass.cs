@@ -1,6 +1,6 @@
-﻿using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.Bukkit;
+namespace JavaGenerator.Bukkit;
 
 public static class BiomeClass
 {
@@ -15,7 +15,7 @@ public static class BiomeClass
         ValueOf = new("valueOf")
         {
             IsStatic = true,
-            ReturnType = BiomeClass.Class,
+            ReturnType = Class,
             ParameterTypes = [SystemClass.StringClass]
         };
         Class.Methods.Add(ValueOf);

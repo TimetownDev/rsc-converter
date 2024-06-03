@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.Attributes;
+﻿namespace JavaGenerator.Attributes;
 
 public enum AccessAttribute
 {

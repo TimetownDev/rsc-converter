@@ -1,4 +1,4 @@
-﻿namespace rscconventer.Classes;
+﻿namespace Classes;
 
 public class FileData
 {

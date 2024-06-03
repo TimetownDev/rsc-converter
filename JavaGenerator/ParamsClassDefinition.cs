@@ -1,6 +1,6 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 
-namespace rscconventer.JavaGenerator;
+namespace JavaGenerator;
 
 public class ParamsClassDefinition : IClassDefinition
 {

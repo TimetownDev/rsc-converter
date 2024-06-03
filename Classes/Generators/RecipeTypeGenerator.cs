@@ -1,14 +1,14 @@
-﻿using rscconventer.Classes.Interfaces;
+﻿using Classes.Interfaces;
+using JavaGenerator;
+using JavaGenerator.Actions;
+using JavaGenerator.Bukkit;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Slimefun;
+using JavaGenerator.Values;
 using rscconventer.Classes.Yaml;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Generators;
+namespace Classes.Generators;
 
 public class RecipeTypeGenerator : IClassGenerator
 {
@@ -25,8 +25,6 @@ public class RecipeTypeGenerator : IClassGenerator
             if (key is not YamlScalarNode scalarNode) continue;
             string? stringKey = scalarNode.Value;
             if (stringKey == null) continue;
-
-            YamlNode value = pair.Value;
 
             IValue itemStack = mappingNode.ReadItem(stringKey, session.Directory);
             IValue namespacedKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue(session.Name), new StringValue(stringKey.ToLower()));

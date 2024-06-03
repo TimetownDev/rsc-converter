@@ -1,17 +1,17 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator.Values;
+namespace JavaGenerator.Values;
 
 public class MultipleValue : IValue
 {
-    public IList<IValue> Values { get; set; } = [];
+    public IList<IValue?> Values { get; set; } = [];
     public string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
 
         int x = 0;
-        foreach (IValue value in Values)
+        foreach (IValue? value in Values)
         {
             if (value == null)
                 sb.Append("null");
@@ -25,15 +25,15 @@ public class MultipleValue : IValue
         return sb.ToString();
     }
     public MultipleValue() { }
-    public MultipleValue(IList<IValue> values)
+    public MultipleValue(IList<IValue?> values)
     {
         Values = values;
     }
-    public MultipleValue(IList<string> values)
+    public MultipleValue(IList<string?> values)
     {
-        foreach (string value in values)
+        foreach (string? value in values)
         {
-            Values.Add(new StringValue(value));
+            Values.Add(value == null ? new StringValue("null") : new StringValue(value));
         }
     }
 }

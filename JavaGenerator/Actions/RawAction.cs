@@ -1,6 +1,6 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 
-namespace rscconventer.JavaGenerator.Actions;
+namespace JavaGenerator.Actions;
 
 public class RawAction : IAction
 {

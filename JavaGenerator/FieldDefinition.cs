@@ -1,8 +1,8 @@
-﻿using rscconventer.JavaGenerator.Attributes;
-using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Attributes;
+using JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator;
+namespace JavaGenerator;
 
 public class FieldDefinition : IStaticable, IAccessable
 {

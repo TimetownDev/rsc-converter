@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.Interfaces;
+﻿namespace JavaGenerator.Interfaces;
 
 public interface IAction
 {

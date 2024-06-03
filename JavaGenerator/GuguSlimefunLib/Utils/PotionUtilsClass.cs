@@ -1,7 +1,7 @@
-﻿using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.Bukkit;
+using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.GuguSlimefunLib.Utils;
+namespace JavaGenerator.GuguSlimefunLib.Utils;
 
 public static class PotionUtilsClass
 {

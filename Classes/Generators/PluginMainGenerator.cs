@@ -1,18 +1,12 @@
-﻿using rscconventer.Classes.Interfaces;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.System;
-using rscconventer.JavaGenerator.Values;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using Classes.Interfaces;
+using JavaGenerator;
+using JavaGenerator.Actions;
+using JavaGenerator.Bukkit;
+using JavaGenerator.Slimefun;
+using JavaGenerator.System;
+using JavaGenerator.Values;
 
-namespace rscconventer.Classes.Generators;
+namespace Classes.Generators;
 
 public class PluginMainGenerator : IClassGenerator
 {
@@ -44,7 +38,7 @@ public class PluginMainGenerator : IClassGenerator
         }
         getJavaPlugin.Block.Actions.Add(new ReturnAction(new ThisValue()));
         getBugTrackerURL.Block.Actions.Add(new ReturnAction());
-        
+
 
         generated.Methods.Add(onEnable);
         generated.Methods.Add(onDisable);

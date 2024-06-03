@@ -1,17 +1,13 @@
-﻿using rscconventer.Classes.Utils;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.Values;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Classes.Utils;
+using JavaGenerator;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Slimefun;
+using JavaGenerator.Values;
+using rscconventer.Classes.Yaml;
 using System.Text;
-using System.Threading.Tasks;
-using YamlDotNet.Core.Tokens;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Yaml;
+namespace Classes.Yaml;
 
 public static class RecipeReader
 {
@@ -22,7 +18,7 @@ public static class RecipeReader
         bool hasRecipe = yaml.Contains("recipe");
         if (hasRecipe)
         {
-            foreach (KeyValuePair<YamlNode, YamlNode> recipePair in ((YamlMappingNode)yaml["recipe"]))
+            foreach (KeyValuePair<YamlNode, YamlNode> recipePair in (YamlMappingNode)yaml["recipe"])
             {
                 int index = int.Parse(((YamlScalarNode)recipePair.Key).Value!);
                 if (index > 9)

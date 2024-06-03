@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rscconventer", "rscconventer.csproj", "{3B14A2A4-C769-4A72-9A55-457D34A8C38F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rsc-converter", "rsc-converter.csproj", "{3B14A2A4-C769-4A72-9A55-457D34A8C38F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

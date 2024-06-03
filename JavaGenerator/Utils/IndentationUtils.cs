@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace rscconventer.JavaGenerator.Utils;
+namespace JavaGenerator.Utils;
 
 public static class IndentationUtils
 {

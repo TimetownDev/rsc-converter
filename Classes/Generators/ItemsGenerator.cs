@@ -1,16 +1,16 @@
-﻿using rscconventer.Classes.Interfaces;
-using rscconventer.Classes.Utils;
+﻿using Classes.Interfaces;
+using Classes.Utils;
+using JavaGenerator;
+using JavaGenerator.Actions;
+using JavaGenerator.Bukkit;
+using JavaGenerator.GuguSlimefunLib.Items;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Slimefun;
+using JavaGenerator.Values;
 using rscconventer.Classes.Yaml;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Generators;
+namespace Classes.Generators;
 
 public class ItemsGenerator : IClassGenerator
 {
@@ -107,7 +107,7 @@ public class ItemsGenerator : IClassGenerator
 
             YamlNode value = pair.Value;
 
-            String entityType = value.GetString("entity")!;
+            string entityType = value.GetString("entity")!;
             RawValue entity = new($"{EntityTypeClass.Class.Name}.{entityType.ToUpper()}");
             entity.ImportList.Import(EntityTypeClass.Class);
             int chance = value.GetInt("chance")!;

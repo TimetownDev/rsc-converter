@@ -1,8 +1,8 @@
-﻿using rscconventer.JavaGenerator.GuguSlimefunLib.Script;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.System;
+﻿using JavaGenerator.GuguSlimefunLib.Script;
+using JavaGenerator.Slimefun;
+using JavaGenerator.System;
 
-namespace rscconventer.JavaGenerator.GuguSlimefunLib.Items;
+namespace JavaGenerator.GuguSlimefunLib.Items;
 
 public static class GuguSlimefunItemClass
 {

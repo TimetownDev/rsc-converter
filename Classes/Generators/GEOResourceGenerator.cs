@@ -1,20 +1,19 @@
-﻿using rscconventer.Classes.Interfaces;
-using rscconventer.Classes.Utils;
-using rscconventer.Classes.Yaml;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Attributes;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Script;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.System;
-using rscconventer.JavaGenerator.Values;
-using System.Diagnostics.Metrics;
+﻿using Classes.Interfaces;
+using Classes.Utils;
+using Classes.Yaml;
+using JavaGenerator;
+using JavaGenerator.Actions;
+using JavaGenerator.Attributes;
+using JavaGenerator.Bukkit;
+using JavaGenerator.GuguSlimefunLib.Items;
+using JavaGenerator.GuguSlimefunLib.Script;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Slimefun;
+using JavaGenerator.System;
+using JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Generators;
+namespace Classes.Generators;
 
 public class GEOResourceGenerator : IClassGenerator
 {
@@ -86,7 +85,7 @@ public class GEOResourceGenerator : IClassGenerator
 
             itemClass.Methods.Add(preRegister);
 
-            
+
             string geoName = value.GetString("geo_name")!;
             itemClass.FieldList.Add(new(SystemClass.StringClass, "name", new StringValue(geoName))
             {
@@ -135,7 +134,7 @@ public class GEOResourceGenerator : IClassGenerator
             getMaxDeviation.Block.Actions.Add(new ReturnAction(new RawValue("maxDeviation")));
             itemClass.Methods.Add(getMaxDeviation);
 
-            
+
             itemClass.FieldList.Add(new(SupplyInfoClass.Class, "supplyInfo", new NewInstanceAction(SupplyInfoClass.Class))
             {
                 Access = AccessAttribute.Private
@@ -158,7 +157,7 @@ public class GEOResourceGenerator : IClassGenerator
                             string? biomeKey = biomeScalarNode.Value;
                             if (biomeKey == null) continue;
 
-                            if (biomeKey.ToLower() == "others")
+                            if (biomeKey.Equals("others", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 preRegister.Block.Actions.Add(new RawValue("supplyInfo").Invoke(SupplyInfoClass.SetDefaultNormalSupply, new NumberValue<int>(normalMappingNode.GetInt(biomeKey))));
                                 continue;
@@ -185,7 +184,7 @@ public class GEOResourceGenerator : IClassGenerator
                             string? biomeKey = biomeScalarNode.Value;
                             if (biomeKey == null) continue;
 
-                            if (biomeKey.ToLower() == "others")
+                            if (biomeKey.Equals("others", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 preRegister.Block.Actions.Add(new RawValue("supplyInfo").Invoke(SupplyInfoClass.SetDefaultNetherSupply, new NumberValue<int>(netherMappingNode.GetInt(biomeKey))));
                                 continue;
@@ -212,7 +211,7 @@ public class GEOResourceGenerator : IClassGenerator
                             string? biomeKey = biomeScalarNode.Value;
                             if (biomeKey == null) continue;
 
-                            if (biomeKey.ToLower() == "others")
+                            if (biomeKey.Equals("others", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 preRegister.Block.Actions.Add(new RawValue("supplyInfo").Invoke(SupplyInfoClass.SetDefaultTheEndSupply, new NumberValue<int>(theEndMappingNode.GetInt(biomeKey))));
                                 continue;

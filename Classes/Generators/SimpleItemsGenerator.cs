@@ -1,18 +1,18 @@
-﻿using rscconventer.Classes.Interfaces;
-using rscconventer.Classes.Utils;
-using rscconventer.Classes.Yaml;
-using rscconventer.JavaGenerator;
-using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Attributes;
-using rscconventer.JavaGenerator.Bukkit;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Items;
-using rscconventer.JavaGenerator.GuguSlimefunLib.Script;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Slimefun;
-using rscconventer.JavaGenerator.Values;
+﻿using Classes.Interfaces;
+using Classes.Utils;
+using Classes.Yaml;
+using JavaGenerator;
+using JavaGenerator.Actions;
+using JavaGenerator.Attributes;
+using JavaGenerator.Bukkit;
+using JavaGenerator.GuguSlimefunLib.Items;
+using JavaGenerator.GuguSlimefunLib.Script;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Slimefun;
+using JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer.Classes.Generators;
+namespace Classes.Generators;
 
 public class SimpleItemsGenerator : IClassGenerator
 {

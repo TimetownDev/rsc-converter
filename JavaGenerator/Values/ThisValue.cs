@@ -1,6 +1,6 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 
-namespace rscconventer.JavaGenerator.Values;
+namespace JavaGenerator.Values;
 
 public class ThisValue : IValue
 {

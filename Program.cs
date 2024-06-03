@@ -1,6 +1,6 @@
-﻿using rscconventer.Classes;
-using rscconventer.Classes.Generators;
-using rscconventer.Classes.Utils;
+﻿using Classes;
+using Classes.Generators;
+using Classes.Utils;
 using System.Text;
 using YamlDotNet.RepresentationModel;
 

@@ -1,7 +1,7 @@
-﻿using rscconventer.JavaGenerator.Interfaces;
+﻿using JavaGenerator.Interfaces;
 using System.Text;
 
-namespace rscconventer.JavaGenerator.Actions;
+namespace JavaGenerator.Actions;
 
 public class SuperInvokeAction : IAction
 {

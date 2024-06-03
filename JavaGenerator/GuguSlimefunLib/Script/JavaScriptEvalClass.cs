@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.GuguSlimefunLib.Script;
+﻿namespace JavaGenerator.GuguSlimefunLib.Script;
 
 public static class JavaScriptEvalClass
 {

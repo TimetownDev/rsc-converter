@@ -1,11 +1,11 @@
-﻿using rscconventer.JavaGenerator.Actions;
-using rscconventer.JavaGenerator.Attributes;
-using rscconventer.JavaGenerator.Exceptions;
-using rscconventer.JavaGenerator.Interfaces;
-using rscconventer.JavaGenerator.Utils;
+﻿using JavaGenerator.Actions;
+using JavaGenerator.Attributes;
+using JavaGenerator.Exceptions;
+using JavaGenerator.Interfaces;
+using JavaGenerator.Utils;
 using System.Text;
 
-namespace rscconventer.JavaGenerator;
+namespace JavaGenerator;
 
 public class ClassDefinition : IAccessable, IClassDefinition
 {

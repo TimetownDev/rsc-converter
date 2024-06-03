@@ -1,4 +1,4 @@
-﻿namespace rscconventer.JavaGenerator.Bukkit;
+﻿namespace JavaGenerator.Bukkit;
 
 public static class ItemStackClass
 {

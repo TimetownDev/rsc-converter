@@ -1,7 +1,7 @@
-﻿using rscconventer.Classes.Interfaces;
-using rscconventer.JavaGenerator;
+﻿using Classes.Interfaces;
+using JavaGenerator;
 
-namespace rscconventer.Classes;
+namespace Classes;
 
 public class BuildSession
 {

@@ -1,6 +1,6 @@
-﻿using rscconventer.JavaGenerator;
+﻿using JavaGenerator;
 
-namespace rscconventer.Classes.Interfaces;
+namespace Classes.Interfaces;
 
 public interface IClassGenerator
 {
