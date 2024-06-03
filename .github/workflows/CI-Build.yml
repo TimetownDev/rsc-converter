@@ -1,0 +1,69 @@
+name: CI-Build
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "**" ]
+
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  target-version: "net8.0"
+  compile-flags: "--self-contained=true -c Release -p:UseAppHost=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=None -p:DebugSymbols=false -p:PublishAOT=true"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Test
+      run: dotnet test rsc-converter.csproj
+  test_build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Test
+      run: dotnet build rsc-converter.csproj
+  build_Windows:
+    strategy:
+      matrix:
+        arch: ["x64", "arm64"] #We won't support x86 anymore
+    runs-on: windows-latest
+    needs: [test, test_build]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Build
+      run: dotnet build rsc-converter.csproj --arch ${{ matrix.arch }} --os win ${{ env.compile-flags }}
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Windows
+        path: bin/Release/${{ env.target-version }}/win-${{ matrix.arch }}/*.exe
+  Release:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_REF: $ github.ref
+    needs: [build_Windows]
+    steps:
+    - uses: nelonoel/branch-name@v1
+    - name: Download Windows Build
+      uses: actions/download-artifact@v3
+      with:
+       name: Windows
+    - name: Create Release
+      if: github.event_name != 'pull_request' 
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        automatic_release_tag: AutoBuild_${{ env.BRANCH_NAME }}
+        title: "自动构建版本 - ${{ env.BRANCH_NAME }}"
+        files: |
+            *.exe
