@@ -12,8 +12,7 @@ public class NewInstanceAction : IAction, IValue
         StringBuilder sb = new();
         sb.Append("new");
         sb.Append(' ');
-        classDefinition.ImportList.Import(ClassDefinition);
-        sb.Append(classDefinition.ImportList.GetUsing(ClassDefinition));
+        sb.Append(ClassDefinition.OnImport(classDefinition));
         sb.Append('(');
 
         int x = 0;

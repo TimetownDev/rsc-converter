@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using rscconventer.JavaGenerator.Interfaces;
+using System.Collections;
 using System.Text;
 
 namespace rscconventer.JavaGenerator;
@@ -13,7 +14,7 @@ public class ImportList : IList<string>
 
     public bool IsReadOnly => throw new NotImplementedException();
 
-    public void Add(ClassDefinition item)
+    public void Add(IClassDefinition item)
     {
         imports.Add(item.FullName);
     }
@@ -28,7 +29,7 @@ public class ImportList : IList<string>
         imports.Clear();
     }
 
-    public bool Contains(ClassDefinition item)
+    public bool Contains(IClassDefinition item)
     {
         return imports.Contains(item.FullName);
     }
@@ -88,15 +89,16 @@ public class ImportList : IList<string>
         return ((IEnumerable)imports).GetEnumerator();
     }
 
-    public void Import(ClassDefinition classDefinition)
+    public void Import(IClassDefinition classDefinition)
     {
         if (CanImport(classDefinition))
         {
             Add(classDefinition);
         }
     }
-    public bool CanImport(ClassDefinition classDefinition)
+    public bool CanImport(IClassDefinition classDefinition)
     {
+        if (!classDefinition.NeedImport) return false;
         foreach (string fullName in imports)
         {
             if (GetName(fullName) == classDefinition.Name) return false;
@@ -104,7 +106,7 @@ public class ImportList : IList<string>
 
         return true;
     }
-    public string GetUsing(ClassDefinition classDefinition)
+    public string GetUsing(IClassDefinition classDefinition)
     {
         if (Contains(classDefinition)) return classDefinition.Name;
         return classDefinition.FullName;

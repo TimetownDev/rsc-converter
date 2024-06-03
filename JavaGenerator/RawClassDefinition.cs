@@ -5,6 +5,12 @@ namespace rscconventer.JavaGenerator;
 public class RawClassDefinition : IClassDefinition
 {
     public string Name { get; set; }
+
+    public string Namespace => "";
+
+    public string FullName => Name;
+    public bool NeedImport => false;
+
     public RawClassDefinition(string name)
     {
         Name = name;

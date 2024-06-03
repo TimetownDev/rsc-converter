@@ -29,13 +29,7 @@ public class MethodDefinition : IStaticable, IAccessable
         }
         else
         {
-            if (ReturnType is ClassDefinition returnType)
-            {
-                classDefinition.ImportList.Import(returnType);
-                sb.Append(classDefinition.ImportList.GetUsing(returnType));
-            }
-            else
-                sb.Append(ReturnType.Name);
+            sb.Append(ReturnType.OnImport(classDefinition));
         }
         sb.Append(' ');
         sb.Append(Name);
@@ -44,8 +38,7 @@ public class MethodDefinition : IStaticable, IAccessable
         int x = 0;
         foreach (ClassDefinition parameter in ParameterTypes)
         {
-            classDefinition.ImportList.Import(parameter);
-            sb.Append(classDefinition.ImportList.GetUsing(parameter));
+            sb.Append(parameter.OnImport(classDefinition));
             sb.Append(' ');
             sb.Append($"param{x}");
             if (x + 1 != ParameterTypes.Count)

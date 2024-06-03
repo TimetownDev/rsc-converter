@@ -73,6 +73,8 @@ public class ClassDefinition : IAccessable, IClassDefinition
     public IList<MethodDefinition> Methods { get; set; } = [];
     public IList<CtorMethodDefinition> Ctors { get; set; } = [];
 
+    string IClassDefinition.Namespace => Namespace.Name;
+
     public ClassDefinition(string @namespace, string name)
     {
         Namespace = new Namespace(@namespace);
@@ -118,7 +120,7 @@ public class ClassDefinition : IAccessable, IClassDefinition
             sb.Append("extends");
             sb.Append(' ');
             ImportList.Import(Super);
-            sb.Append(ImportList.GetUsing(Super));
+            sb.Append(Super.OnImport(this));
             sb.Append(' ');
         }
         if (Interfaces.Count > 0)
@@ -127,8 +129,7 @@ public class ClassDefinition : IAccessable, IClassDefinition
             sb.Append(' ');
             sb.Append(string.Join(", ", Interfaces.Select(x =>
             {
-                ImportList.Import(x);
-                return ImportList.GetUsing(x);
+                return x.OnImport(this);
             })));
             sb.Append(' ');
         }

@@ -35,11 +35,10 @@ public class FieldDefinition : IStaticable, IAccessable
         }
         if (Type is ClassDefinition type)
         {
-            classDefinition.ImportList.Import(type);
-            sb.Append(classDefinition.ImportList.GetUsing(type));
+            sb.Append(type.OnImport(classDefinition));
         }
         else
-            sb.Append(Type.Name);
+            sb.Append(Type.OnImport(classDefinition));
 
         sb.Append(' ');
         sb.Append(Name);

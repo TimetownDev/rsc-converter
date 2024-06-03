@@ -34,7 +34,7 @@ public class ItemGroupGenerator : IClassGenerator
 
             IValue itemStack = value.ReadItem("item", session.Directory);
             string type = value.GetString("type", "");
-            IValue namespacedKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue(session.Name), new StringValue(stringKey));
+            IValue namespacedKey = new NewInstanceAction(NamespacedKeyClass.Class, new StringValue(session.Name), new StringValue(stringKey.ToLower()));
 
             int tier = value.GetInt("tier", 3);
             if (tier <= 0)

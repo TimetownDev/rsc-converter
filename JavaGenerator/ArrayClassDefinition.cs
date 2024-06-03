@@ -2,7 +2,7 @@
 
 namespace rscconventer.JavaGenerator;
 
-public class ParamsClassDefinition : IClassDefinition
+public class ArrayClassDefinition : IClassDefinition
 {
     public IClassDefinition Class { get; set; }
     public string Name => Class.Name;
@@ -11,13 +11,13 @@ public class ParamsClassDefinition : IClassDefinition
 
     public string FullName => Class.FullName;
 
-    public ParamsClassDefinition(IClassDefinition classDefinition)
+    public ArrayClassDefinition(IClassDefinition classDefinition)
     {
         Class = classDefinition;
     }
 
     public string OnImport(ClassDefinition classDefinition)
     {
-        return $"{Class.OnImport(classDefinition)}...";
+        return $"{Class.OnImport(classDefinition)}[]";
     }
 }

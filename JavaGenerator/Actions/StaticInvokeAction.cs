@@ -14,8 +14,7 @@ public class StaticInvokeAction : IAction, IValue
     public string BuildContent(ClassDefinition classDefinition)
     {
         StringBuilder sb = new();
-        classDefinition.ImportList.Import(ClassDefinition);
-        sb.Append(classDefinition.ImportList.GetUsing(ClassDefinition));
+        sb.Append(ClassDefinition.OnImport(classDefinition));
         sb.Append('.');
         sb.Append(MethodDefinition.Name);
         sb.Append('(');

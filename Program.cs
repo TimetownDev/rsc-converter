@@ -26,6 +26,7 @@ namespace rscconventer
             session.ClassGenerators.Add(new GEOResourceGenerator());
             session.ClassGenerators.Add(new MobDropsGenerator());
             session.ClassGenerators.Add(new SimpleItemsGenerator());
+            session.ClassGenerators.Add(new ArmorsGenerator());
             session.ClassGenerators.Add(new FoodsGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());
             session.FileGenerators.Add(new PluginYamlGenerator());
