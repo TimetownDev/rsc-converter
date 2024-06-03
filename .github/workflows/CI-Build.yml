@@ -31,7 +31,7 @@ jobs:
     strategy:
       matrix:
         arch: ["x64", "arm64"] #We won't support x86 anymore
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: [test, test_build]
     steps:
     - name: Checkout
