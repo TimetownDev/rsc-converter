@@ -17,7 +17,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Test
-      run: dotnet test rsc-converter.csproj
+      run: dotnet test rsc_converter.csproj
   test_build:
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +26,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Test
-      run: dotnet build rsc-converter.csproj
+      run: dotnet build rsc_converter.csproj
   build_Windows:
     strategy:
       matrix:
@@ -39,9 +39,9 @@ jobs:
       with:
         fetch-depth: 0
     - name: Build
-      run: dotnet publish rsc-converter.csproj --arch ${{ matrix.arch }} --os win ${{ env.compile-flags }}
+      run: dotnet publish rsc_converter.csproj --arch ${{ matrix.arch }} --os win ${{ env.compile-flags }}
     - name: Rename File
-      run: mv bin/Release/${{ env.target-version }}/win-${{ matrix.arch }}/publish/rsc-converter.exe bin/Release/${{ env.target-version }}/win-${{ matrix.arch }}/publish/rsc-converter-win${{ matrix.arch }}.exe
+      run: mv bin/Release/${{ env.target-version }}/win-${{ matrix.arch }}/publish/rsc_converter.exe bin/Release/${{ env.target-version }}/win-${{ matrix.arch }}/publish/rsc-converter-win${{ matrix.arch }}.exe
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
