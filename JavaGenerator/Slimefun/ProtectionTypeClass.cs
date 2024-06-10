@@ -1,6 +1,6 @@
-﻿using JavaGenerator.System;
+﻿using rsc_converter.JavaGenerator.System;
 
-namespace JavaGenerator.Slimefun;
+namespace rsc_converter.JavaGenerator.Slimefun;
 
 public static class ProtectionTypeClass
 {

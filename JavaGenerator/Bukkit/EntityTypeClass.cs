@@ -1,4 +1,4 @@
-﻿namespace JavaGenerator.Bukkit;
+﻿namespace rsc_converter.JavaGenerator.Bukkit;
 
 public static class EntityTypeClass
 {

@@ -1,6 +1,6 @@
-﻿using JavaGenerator.Slimefun;
+﻿using rsc_converter.JavaGenerator.Slimefun;
 
-namespace JavaGenerator.GuguSlimefunLib.Items;
+namespace rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
 
 public static class ItemGroupButtonClass
 {

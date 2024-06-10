@@ -1,4 +1,4 @@
-﻿namespace JavaGenerator;
+﻿namespace rsc_converter.JavaGenerator;
 
 public class Namespace
 {

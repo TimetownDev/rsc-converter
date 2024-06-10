@@ -1,4 +1,4 @@
-﻿namespace JavaGenerator.Slimefun;
+﻿namespace rsc_converter.JavaGenerator.Slimefun;
 
 public static class GEOResourceClass
 {

@@ -1,17 +1,17 @@
-﻿using Classes.Interfaces;
-using Classes.Utils;
-using Classes.Yaml;
-using JavaGenerator;
-using JavaGenerator.Actions;
-using JavaGenerator.Bukkit;
-using JavaGenerator.GuguSlimefunLib.Items;
-using JavaGenerator.GuguSlimefunLib.Script;
-using JavaGenerator.Interfaces;
-using JavaGenerator.Slimefun;
-using JavaGenerator.Values;
+﻿using rsc_converter.Classes.Interfaces;
+using rsc_converter.Classes.Utils;
+using rsc_converter.Classes.Yaml;
+using rsc_converter.JavaGenerator;
+using rsc_converter.JavaGenerator.Actions;
+using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
+using rsc_converter.JavaGenerator.GuguSlimefunLib.Script;
+using rsc_converter.JavaGenerator.Interfaces;
+using rsc_converter.JavaGenerator.Slimefun;
+using rsc_converter.JavaGenerator.Values;
 using YamlDotNet.RepresentationModel;
 
-namespace Classes.Generators;
+namespace rsc_converter.Classes.Generators;
 
 public class FoodsGenerator : IClassGenerator
 {

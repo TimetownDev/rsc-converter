@@ -1,16 +1,16 @@
-﻿using Classes.Interfaces;
-using Classes.Utils;
-using JavaGenerator;
-using JavaGenerator.Actions;
-using JavaGenerator.Bukkit;
-using JavaGenerator.GuguSlimefunLib.Items;
-using JavaGenerator.Interfaces;
-using JavaGenerator.Slimefun;
-using JavaGenerator.Values;
+﻿using rsc_converter.Classes.Interfaces;
+using rsc_converter.Classes.Utils;
+using rsc_converter.JavaGenerator;
+using rsc_converter.JavaGenerator.Actions;
+using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
+using rsc_converter.JavaGenerator.Interfaces;
+using rsc_converter.JavaGenerator.Slimefun;
+using rsc_converter.JavaGenerator.Values;
 using rscconventer.Classes.Yaml;
 using YamlDotNet.RepresentationModel;
 
-namespace Classes.Generators;
+namespace rsc_converter.Classes.Generators;
 
 public class ItemsGenerator : IClassGenerator
 {
@@ -28,6 +28,8 @@ public class ItemsGenerator : IClassGenerator
         YamlNode mobDrops = stream.Documents[0].RootNode;
         stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "armors.yml"))));
         YamlNode armors = stream.Documents[0].RootNode;
+        stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "capacitors.yml"))));
+        YamlNode capacitors = stream.Documents[0].RootNode;
 
         ClassDefinition generated = new($"me.ddggdd135.{session.Name}.items", $"{char.ToUpper(session.Name[0])}{session.Name[1..]}Items");
         MethodDefinition onSetup = new("onSetup")
@@ -119,7 +121,7 @@ public class ItemsGenerator : IClassGenerator
                 IsStatic = true
             };
             generated.FieldList.Add(slimefunItemStackField);
-        };
+        }
 
         if (armors is not YamlMappingNode armorsMappingNode) return null;
         foreach (KeyValuePair<YamlNode, YamlNode> pair in armorsMappingNode)
@@ -144,6 +146,26 @@ public class ItemsGenerator : IClassGenerator
                 };
                 generated.FieldList.Add(slimefunItemStackField);
             }
+        }
+
+        if (capacitors is not YamlMappingNode capacitorsMappingNode) return null;
+        foreach (KeyValuePair<YamlNode, YamlNode> pair in capacitorsMappingNode)
+        {
+            YamlNode key = pair.Key;
+            if (key is not YamlScalarNode scalarNode) continue;
+            string? stringKey = scalarNode.Value;
+            if (stringKey == null) continue;
+
+            YamlNode value = pair.Value;
+
+            IValue itemStack = value.ReadItem("item", session.Directory, generated);
+
+            IValue slimefunItemStack = new NewInstanceAction(SlimefunItemStackClass.Class, new StringValue(stringKey.ToUpper()), itemStack);
+            FieldDefinition slimefunItemStackField = new(SlimefunItemStackClass.Class, stringKey.ToUpper(), slimefunItemStack)
+            {
+                IsStatic = true
+            };
+            generated.FieldList.Add(slimefunItemStackField);
         }
 
         return [generated];

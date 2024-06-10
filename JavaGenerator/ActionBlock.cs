@@ -1,7 +1,7 @@
-﻿using JavaGenerator.Interfaces;
+﻿using rsc_converter.JavaGenerator.Interfaces;
 using System.Text;
 
-namespace JavaGenerator;
+namespace rsc_converter.JavaGenerator;
 
 public class ActionBlock
 {

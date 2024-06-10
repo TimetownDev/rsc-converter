@@ -1,6 +1,6 @@
-﻿using JavaGenerator.Actions;
+﻿using rsc_converter.JavaGenerator.Actions;
 
-namespace JavaGenerator.Interfaces;
+namespace rsc_converter.JavaGenerator.Interfaces;
 
 public interface IValue
 {

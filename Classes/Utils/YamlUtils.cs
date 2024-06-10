@@ -2,7 +2,7 @@
 using System.Numerics;
 using YamlDotNet.RepresentationModel;
 
-namespace Classes.Utils;
+namespace rsc_converter.Classes.Utils;
 
 public static class YamlUtils
 {

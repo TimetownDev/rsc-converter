@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace Classes.Utils;
+namespace rsc_converter.Classes.Utils;
 
 public static class PomUtils
 {

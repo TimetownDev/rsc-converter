@@ -1,10 +1,11 @@
-﻿using Classes.Interfaces;
-using Classes.Utils;
+﻿using rsc_converter.Classes;
+using rsc_converter.Classes.Interfaces;
+using rsc_converter.Classes.Utils;
 using System.Text;
 using System.Xml;
 using YamlDotNet.RepresentationModel;
 
-namespace Classes.Generators;
+namespace rsc_converter.Classes.Generators;
 
 public class PluginYamlGenerator : IFileGenerator
 {

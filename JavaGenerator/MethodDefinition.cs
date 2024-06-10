@@ -1,9 +1,9 @@
-﻿using JavaGenerator.Attributes;
-using JavaGenerator.Interfaces;
-using JavaGenerator.Utils;
+﻿using rsc_converter.JavaGenerator.Attributes;
+using rsc_converter.JavaGenerator.Interfaces;
+using rsc_converter.JavaGenerator.Utils;
 using System.Text;
 
-namespace JavaGenerator;
+namespace rsc_converter.JavaGenerator;
 
 public class MethodDefinition : IStaticable, IAccessable
 {

@@ -1,18 +1,18 @@
-﻿using Classes.Interfaces;
-using Classes.Utils;
-using JavaGenerator;
-using JavaGenerator.Actions;
-using JavaGenerator.Bukkit;
-using JavaGenerator.GuguSlimefunLib.Items;
-using JavaGenerator.GuguSlimefunLib.Utils;
-using JavaGenerator.Interfaces;
-using JavaGenerator.Slimefun;
-using JavaGenerator.System;
-using JavaGenerator.Values;
+﻿using rsc_converter.Classes.Interfaces;
+using rsc_converter.Classes.Utils;
+using rsc_converter.JavaGenerator;
+using rsc_converter.JavaGenerator.Actions;
+using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
+using rsc_converter.JavaGenerator.GuguSlimefunLib.Utils;
+using rsc_converter.JavaGenerator.Interfaces;
+using rsc_converter.JavaGenerator.Slimefun;
+using rsc_converter.JavaGenerator.System;
+using rsc_converter.JavaGenerator.Values;
 using rscconventer.Classes.Yaml;
 using YamlDotNet.RepresentationModel;
 
-namespace Classes.Generators;
+namespace rsc_converter.Classes.Generators;
 
 public class ItemGroupGenerator : IClassGenerator
 {

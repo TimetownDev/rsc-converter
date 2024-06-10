@@ -1,13 +1,13 @@
-﻿using Classes.Utils;
-using JavaGenerator;
-using JavaGenerator.Interfaces;
-using JavaGenerator.Slimefun;
-using JavaGenerator.Values;
+﻿using rsc_converter.Classes.Utils;
+using rsc_converter.JavaGenerator;
+using rsc_converter.JavaGenerator.Interfaces;
+using rsc_converter.JavaGenerator.Slimefun;
+using rsc_converter.JavaGenerator.Values;
 using rscconventer.Classes.Yaml;
 using System.Text;
 using YamlDotNet.RepresentationModel;
 
-namespace Classes.Yaml;
+namespace rsc_converter.Classes.Yaml;
 
 public static class RecipeReader
 {

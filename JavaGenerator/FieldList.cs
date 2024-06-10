@@ -1,8 +1,8 @@
-﻿using JavaGenerator.Exceptions;
+﻿using rsc_converter.JavaGenerator.Exceptions;
 using System.Collections;
 using System.Text;
 
-namespace JavaGenerator;
+namespace rsc_converter.JavaGenerator;
 
 public class FieldList : IList<FieldDefinition>
 {

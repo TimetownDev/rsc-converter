@@ -1,6 +1,6 @@
-﻿using JavaGenerator.Interfaces;
+﻿using rsc_converter.JavaGenerator.Interfaces;
 
-namespace JavaGenerator.Bukkit;
+namespace rsc_converter.JavaGenerator.Bukkit;
 
 public class MaterialValue : IValue
 {

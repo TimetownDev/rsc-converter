@@ -1,10 +1,10 @@
-﻿using Classes.Utils;
-using JavaGenerator;
-using JavaGenerator.Actions;
-using JavaGenerator.Bukkit;
-using JavaGenerator.GuguSlimefunLib.Items;
-using JavaGenerator.Interfaces;
-using JavaGenerator.Values;
+﻿using rsc_converter.Classes.Utils;
+using rsc_converter.JavaGenerator;
+using rsc_converter.JavaGenerator.Actions;
+using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
+using rsc_converter.JavaGenerator.Interfaces;
+using rsc_converter.JavaGenerator.Values;
 using System.Text.RegularExpressions;
 using YamlDotNet.RepresentationModel;
 
@@ -121,14 +121,14 @@ public static partial class ItemReader
                 {
                     if (lore.Any())
                     {
-                        itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromLore,new NewInstanceAction(AdvancedCustomItemStackClass.Class, new MaterialValue(material)), new MultipleValue(lore));
+                        itemStack = AdvancedCustomItemStackClass.Class.Invoke(AdvancedCustomItemStackClass.FromLore, new NewInstanceAction(AdvancedCustomItemStackClass.Class, new MaterialValue(material)), new MultipleValue(lore));
                     }
                     else
                     {
                         itemStack = itemStack = new NewInstanceAction(AdvancedCustomItemStackClass.Class, new MaterialValue(material));
                     }
                 }
-                
+
                 break;
         }
 

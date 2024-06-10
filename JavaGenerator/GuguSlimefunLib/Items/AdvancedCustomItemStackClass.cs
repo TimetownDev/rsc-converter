@@ -1,7 +1,7 @@
-﻿using JavaGenerator.Bukkit;
-using JavaGenerator.System;
+﻿using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.System;
 
-namespace JavaGenerator.GuguSlimefunLib.Items;
+namespace rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
 
 public static class AdvancedCustomItemStackClass
 {

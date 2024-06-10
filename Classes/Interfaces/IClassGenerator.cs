@@ -1,6 +1,6 @@
-﻿using JavaGenerator;
+﻿using rsc_converter.JavaGenerator;
 
-namespace Classes.Interfaces;
+namespace rsc_converter.Classes.Interfaces;
 
 public interface IClassGenerator
 {

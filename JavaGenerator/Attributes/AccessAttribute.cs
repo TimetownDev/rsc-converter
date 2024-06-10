@@ -1,4 +1,4 @@
-﻿namespace JavaGenerator.Attributes;
+﻿namespace rsc_converter.JavaGenerator.Attributes;
 
 public enum AccessAttribute
 {

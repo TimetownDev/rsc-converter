@@ -1,4 +1,4 @@
-﻿namespace Classes.Utils;
+﻿namespace rsc_converter.Classes.Utils;
 
 public static class StringUtils
 {

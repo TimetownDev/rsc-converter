@@ -1,6 +1,6 @@
-﻿using JavaGenerator.Interfaces;
+﻿using rsc_converter.JavaGenerator.Interfaces;
 
-namespace JavaGenerator;
+namespace rsc_converter.JavaGenerator;
 
 public class ParameterValue : IValue
 {

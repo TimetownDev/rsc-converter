@@ -1,6 +1,6 @@
-﻿using JavaGenerator.Interfaces;
+﻿using rsc_converter.JavaGenerator.Interfaces;
 
-namespace JavaGenerator.Values;
+namespace rsc_converter.JavaGenerator.Values;
 
 public class RawValue : IValue
 {

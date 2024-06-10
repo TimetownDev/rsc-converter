@@ -1,7 +1,7 @@
-﻿using JavaGenerator.Interfaces;
+﻿using rsc_converter.JavaGenerator.Interfaces;
 using System.Numerics;
 
-namespace JavaGenerator.Values;
+namespace rsc_converter.JavaGenerator.Values;
 
 public class NumberValue<T> : IValue where T : INumber<T>
 {

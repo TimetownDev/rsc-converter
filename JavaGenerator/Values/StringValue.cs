@@ -1,8 +1,8 @@
-﻿using Classes.Utils;
-using JavaGenerator.Interfaces;
+﻿using rsc_converter.Classes.Utils;
+using rsc_converter.JavaGenerator.Interfaces;
 using System.Text;
 
-namespace JavaGenerator.Values;
+namespace rsc_converter.JavaGenerator.Values;
 
 public class StringValue : IValue
 {

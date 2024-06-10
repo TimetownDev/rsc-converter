@@ -1,4 +1,4 @@
-﻿namespace Classes;
+﻿namespace rsc_converter.Classes;
 
 public class FileData
 {

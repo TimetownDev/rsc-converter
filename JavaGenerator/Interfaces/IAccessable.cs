@@ -1,6 +1,6 @@
-﻿using JavaGenerator.Attributes;
+﻿using rsc_converter.JavaGenerator.Attributes;
 
-namespace JavaGenerator.Interfaces;
+namespace rsc_converter.JavaGenerator.Interfaces;
 
 public interface IAccessable
 {

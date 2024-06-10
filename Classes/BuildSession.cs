@@ -1,7 +1,7 @@
-﻿using Classes.Interfaces;
-using JavaGenerator;
+﻿using rsc_converter.Classes.Interfaces;
+using rsc_converter.JavaGenerator;
 
-namespace Classes;
+namespace rsc_converter.Classes;
 
 public class BuildSession
 {

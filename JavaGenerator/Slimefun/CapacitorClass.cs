@@ -1,11 +1,11 @@
 ﻿namespace rsc_converter.JavaGenerator.Slimefun;
 
-public static class RecipeTypeClass
+public static class CapacitorClass
 {
     public static ClassDefinition Class { get; }
-    static RecipeTypeClass()
+    static CapacitorClass()
     {
-        Class = new ClassDefinition("io.github.thebusybiscuit.slimefun4.api.recipes", "RecipeType")
+        Class = new("io.github.thebusybiscuit.slimefun4.implementation.items.electric", "Capacitor")
         {
             NeedGenerate = false
         };

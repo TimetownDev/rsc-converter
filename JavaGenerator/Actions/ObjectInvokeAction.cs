@@ -1,7 +1,7 @@
-﻿using JavaGenerator.Interfaces;
+﻿using rsc_converter.JavaGenerator.Interfaces;
 using System.Text;
 
-namespace JavaGenerator.Actions;
+namespace rsc_converter.JavaGenerator.Actions;
 
 public class ObjectInvokeAction : IAction, IValue
 {

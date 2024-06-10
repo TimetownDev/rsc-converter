@@ -1,9 +1,9 @@
-﻿using JavaGenerator.Bukkit;
-using JavaGenerator.GuguSlimefunLib.Items;
-using JavaGenerator.Slimefun;
-using JavaGenerator.System;
+﻿using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
+using rsc_converter.JavaGenerator.Slimefun;
+using rsc_converter.JavaGenerator.System;
 
-namespace JavaGenerator.GuguSlimefunLib.Utils;
+namespace rsc_converter.JavaGenerator.GuguSlimefunLib.Utils;
 
 public static class ItemGroupUtilsClass
 {

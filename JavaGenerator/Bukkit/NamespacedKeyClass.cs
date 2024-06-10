@@ -1,6 +1,6 @@
-﻿using JavaGenerator.System;
+﻿using rsc_converter.JavaGenerator.System;
 
-namespace JavaGenerator.Bukkit;
+namespace rsc_converter.JavaGenerator.Bukkit;
 
 public static class NamespacedKeyClass
 {

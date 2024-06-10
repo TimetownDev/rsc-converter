@@ -1,12 +1,12 @@
-﻿using Classes.Interfaces;
-using JavaGenerator;
-using JavaGenerator.Actions;
-using JavaGenerator.Bukkit;
-using JavaGenerator.Slimefun;
-using JavaGenerator.System;
-using JavaGenerator.Values;
+﻿using rsc_converter.JavaGenerator.Actions;
+using rsc_converter.JavaGenerator.Values;
+using rsc_converter.Classes.Interfaces;
+using rsc_converter.JavaGenerator;
+using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.Slimefun;
+using rsc_converter.JavaGenerator.System;
 
-namespace Classes.Generators;
+namespace rsc_converter.Classes.Generators;
 
 public class PluginMainGenerator : IClassGenerator
 {

@@ -1,4 +1,4 @@
-﻿namespace JavaGenerator.GuguSlimefunLib.Items;
+﻿namespace rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
 
 public static class RainbowTypeClass
 {

@@ -1,14 +1,14 @@
-﻿using Classes.Interfaces;
-using JavaGenerator;
-using JavaGenerator.Actions;
-using JavaGenerator.Bukkit;
-using JavaGenerator.Interfaces;
-using JavaGenerator.Slimefun;
-using JavaGenerator.Values;
+﻿using rsc_converter.Classes.Interfaces;
+using rsc_converter.JavaGenerator;
+using rsc_converter.JavaGenerator.Actions;
+using rsc_converter.JavaGenerator.Bukkit;
+using rsc_converter.JavaGenerator.Interfaces;
+using rsc_converter.JavaGenerator.Slimefun;
+using rsc_converter.JavaGenerator.Values;
 using rscconventer.Classes.Yaml;
 using YamlDotNet.RepresentationModel;
 
-namespace Classes.Generators;
+namespace rsc_converter.Classes.Generators;
 
 public class RecipeTypeGenerator : IClassGenerator
 {

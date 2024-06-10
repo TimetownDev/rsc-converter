@@ -1,10 +1,10 @@
-﻿using Classes;
-using Classes.Generators;
-using Classes.Utils;
+﻿using rsc_converter.Classes;
+using rsc_converter.Classes.Generators;
+using rsc_converter.Classes.Utils;
 using System.Text;
 using YamlDotNet.RepresentationModel;
 
-namespace rscconventer
+namespace rsc_converter
 {
     public class Program
     {
@@ -27,6 +27,7 @@ namespace rscconventer
             session.ClassGenerators.Add(new MobDropsGenerator());
             session.ClassGenerators.Add(new SimpleItemsGenerator());
             session.ClassGenerators.Add(new ArmorsGenerator());
+            session.ClassGenerators.Add(new CapacitorsGenerator());
             session.ClassGenerators.Add(new FoodsGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());
             session.FileGenerators.Add(new PluginYamlGenerator());

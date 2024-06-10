@@ -1,6 +1,6 @@
-﻿using JavaGenerator.Interfaces;
+﻿using rsc_converter.JavaGenerator.Interfaces;
 
-namespace JavaGenerator.Slimefun;
+namespace rsc_converter.JavaGenerator.Slimefun;
 
 public class ProtectionTypeValue : IValue
 {

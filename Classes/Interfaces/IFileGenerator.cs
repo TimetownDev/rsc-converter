@@ -1,4 +1,4 @@
-﻿namespace Classes.Interfaces;
+﻿namespace rsc_converter.Classes.Interfaces;
 
 public interface IFileGenerator
 {
