@@ -29,6 +29,7 @@ namespace rsc_converter
             session.ClassGenerators.Add(new ArmorsGenerator());
             session.ClassGenerators.Add(new CapacitorsGenerator());
             session.ClassGenerators.Add(new FoodsGenerator());
+            session.ClassGenerators.Add(new MenusGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());
             session.FileGenerators.Add(new PluginYamlGenerator());
             session.Build();

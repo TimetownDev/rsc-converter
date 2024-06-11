@@ -235,6 +235,20 @@ public static class YamlUtils
         return bool.Parse(data);
     }
 
+    public static Range? GetRange(this YamlNode yaml, string key)
+    {
+        if (!IsRange(yaml, key)) return null;
+
+        return Range.Parse(yaml.GetString(key)!);
+    }
+
+    public static Range GetRange(this YamlNode yaml, string key, Range @default)
+    {
+        if (!IsRange(yaml, key)) return @default;
+
+        return yaml.GetRange(key)!;
+    }
+
     #endregion
 
     #region set
@@ -337,5 +351,10 @@ public static class YamlUtils
     public static bool IsList(this YamlNode yaml, string key)
     {
         return yaml[key] is YamlSequenceNode;
+    }
+
+    public static bool IsRange(this YamlNode yaml, string key)
+    {
+        return Range.IsRange(yaml.GetString(key, ""));
     }
 }

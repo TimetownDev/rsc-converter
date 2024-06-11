@@ -67,6 +67,7 @@ public class FoodsGenerator : IClassGenerator
             itemClasses.Add(itemClass);
             onSetup.Block.Actions.Add(new NewInstanceAction(itemClass, itemGroup, slimefunItemStackValue, recipeType, new MultipleValue(recipe)).Invoke(GuguSlimefunItemClass.Register, new ParameterValue(0)));
         }
+
         return itemClasses;
     }
 }

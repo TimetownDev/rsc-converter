@@ -116,7 +116,7 @@ public class PluginYamlGenerator : IFileGenerator
 
         pom.AddDependency("io.papermc.paper", "paper-api", "1.20.1-R0.1-SNAPSHOT");
         pom.AddDependency("com.github.SlimefunGuguProject", "Slimefun4", "dev-SNAPSHOT");
-        pom.AddDependency("com.github.TimetownDev", "GuguSlimefunLib", "edbbee0b56");
+        pom.AddDependency("com.github.TimetownDev", "GuguSlimefunLib", "db5cd4152e");
 
         using MemoryStream pomStream = new();
         pom.Save(pomStream);

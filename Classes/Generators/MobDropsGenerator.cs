@@ -22,7 +22,7 @@ public class MobDropsGenerator : IClassGenerator
 
         YamlStream stream = [];
         stream.Load(new StringReader(File.ReadAllText(Path.Combine(session.Directory.FullName, "mob_drops.yml"))));
-        YamlMappingNode items = (YamlMappingNode)stream.Documents[0].RootNode;
+        YamlMappingNode mobDrops = (YamlMappingNode)stream.Documents[0].RootNode;
 
         IList<ClassDefinition> itemClasses = [];
         ClassDefinition itemGroupClass = session.GetClassDefinition($"{char.ToUpper(session.Name[0])}{session.Name[1..]}ItemGroups")!;
@@ -36,7 +36,7 @@ public class MobDropsGenerator : IClassGenerator
         };
         generated.Methods.Add(onSetup);
 
-        if (items is not YamlMappingNode mappingNode) return null;
+        if (mobDrops is not YamlMappingNode mappingNode) return null;
         foreach (KeyValuePair<YamlNode, YamlNode> pair in mappingNode)
         {
             YamlNode key = pair.Key;
