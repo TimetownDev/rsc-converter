@@ -73,22 +73,26 @@ public class MachinesGenerator : IClassGenerator
 
             int workingSlot = value.GetInt("work", -1);
             IList<int>? inputSlot = value.GetIntList("input");
-            inputSlot ??= [];
             IList<int>? outputSlot = value.GetIntList("output");
-            outputSlot ??= [];
 
-            MethodDefinition getInputSlots = new("getInputSlots")
+            if (inputSlot != null)
             {
-                ReturnType = new ArrayClassDefinition(new RawClassDefinition("int"))
-            };
-            getInputSlots.Block.Actions.Add(new ReturnAction(new ArrayValue(new RawClassDefinition("int"), inputSlot.Select<int, IValue>(x => new NumberValue<int>(x)).ToList())));
-            itemClass.Methods.Add(getInputSlots);
-            MethodDefinition getOutputSlots = new("getOutputSlots")
+                MethodDefinition getInputSlots = new("getInputSlots")
+                {
+                    ReturnType = new ArrayClassDefinition(new RawClassDefinition("int"))
+                };
+                getInputSlots.Block.Actions.Add(new ReturnAction(new ArrayValue(new RawClassDefinition("int"), inputSlot.Select<int, IValue>(x => new NumberValue<int>(x)).ToList())));
+                itemClass.Methods.Add(getInputSlots);
+            }
+            if (outputSlot != null)
             {
-                ReturnType = new ArrayClassDefinition(new RawClassDefinition("int"))
-            };
-            getOutputSlots.Block.Actions.Add(new ReturnAction(new ArrayValue(new RawClassDefinition("int"), outputSlot.Select<int, IValue>(x => new NumberValue<int>(x)).ToList())));
-            itemClass.Methods.Add(getOutputSlots);
+                MethodDefinition getOutputSlots = new("getOutputSlots")
+                {
+                    ReturnType = new ArrayClassDefinition(new RawClassDefinition("int"))
+                };
+                getOutputSlots.Block.Actions.Add(new ReturnAction(new ArrayValue(new RawClassDefinition("int"), outputSlot.Select<int, IValue>(x => new NumberValue<int>(x)).ToList())));
+                itemClass.Methods.Add(getOutputSlots);
+            }
 
             IValue machineMenu = new NullValue();
             if (menusClass.FieldList.FindField(stringKey.ToUpper()) != null)
@@ -100,7 +104,7 @@ public class MachinesGenerator : IClassGenerator
             bool isEnergyNetComponent = value.Contains("energy");
             if (isEnergyNetComponent && value["energy"] is YamlMappingNode energyMappingNode)
             {
-                int capacity = energyMappingNode.GetInt(stringKey.ToUpper());
+                int capacity = energyMappingNode.GetInt("capacity");
                 string energyComponentTypeId = energyMappingNode.GetString("type", "NONE")!;
                 RawValue energyComponentType = new($"EnergyNetComponentType.{energyComponentTypeId}");
                 energyComponentType.ImportList.Import(EnergyNetComponentTypeClass.Class);
