@@ -96,7 +96,30 @@ public class MachinesGenerator : IClassGenerator
                 machineMenu = new RawValue($"{char.ToUpper(session.Name[0])}{session.Name[1..]}Menus.{stringKey.ToUpper()}");
                 ((RawValue)machineMenu).ImportList.Import(menusClass);
             }
-            //TODO: 能源网络支持
+
+            bool isEnergyNetComponent = value.Contains("energy");
+            if (isEnergyNetComponent && value["energy"] is YamlMappingNode energyMappingNode)
+            {
+                int capacity = energyMappingNode.GetInt(stringKey.ToUpper());
+                string energyComponentTypeId = energyMappingNode.GetString("type", "NONE")!;
+                RawValue energyComponentType = new($"EnergyNetComponentType.{energyComponentTypeId}");
+                energyComponentType.ImportList.Import(EnergyNetComponentTypeClass.Class);
+                itemClass.Interfaces.Add(EnergyNetComponentClass.Class);
+                itemClass.FieldList.Add(new(new RawClassDefinition("int"), "capacity", new NumberValue<int>(capacity)));
+                itemClass.FieldList.Add(new(EnergyNetComponentTypeClass.Class, "energyComponentType", energyComponentType));
+                MethodDefinition getCapacity = new("getCapacity")
+                {
+                    ReturnType = new RawClassDefinition("int")
+                };
+                getCapacity.Block.Actions.Add(new ReturnAction(new RawValue("capacity")));
+                itemClass.Methods.Add(getCapacity);
+                MethodDefinition getEnergyComponentType = new("getEnergyComponentType")
+                {
+                    ReturnType = EnergyNetComponentTypeClass.Class
+                };
+                getEnergyComponentType.Block.Actions.Add(new ReturnAction(new RawValue("energyComponentType")));
+                itemClass.Methods.Add(getEnergyComponentType);
+            }
 
             itemClasses.Add(itemClass);
             onSetup.Block.Actions.Add(new NewInstanceAction(itemClass, itemGroup, slimefunItemStackValue, recipeType, new ArrayValue(ItemStackClass.Class, recipe), machineMenu, scriptEval, new NumberValue<int>(workingSlot)).Invoke(GuguSlimefunItemClass.Register, new ParameterValue(0)));
