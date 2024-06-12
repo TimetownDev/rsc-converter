@@ -3,6 +3,7 @@ using rsc_converter.Classes.Utils;
 using rsc_converter.Classes.Yaml;
 using rsc_converter.JavaGenerator;
 using rsc_converter.JavaGenerator.Actions;
+using rsc_converter.JavaGenerator.Bukkit;
 using rsc_converter.JavaGenerator.GuguSlimefunLib.Items;
 using rsc_converter.JavaGenerator.Interfaces;
 using rsc_converter.JavaGenerator.Slimefun;
@@ -52,7 +53,7 @@ public class CapacitorsGenerator : IClassGenerator
             int capacity = value.GetInt("capacity");
             if (capacity <= 0) throw new ArgumentException("capacity必须大于0");
 
-            onSetup.Block.Actions.Add(new NewInstanceAction(CapacitorClass.Class, new NumberValue<int>(capacity), itemGroup, slimefunItemStackValue, recipeType, new MultipleValue(recipe)).Invoke(GuguSlimefunItemClass.Register, new ParameterValue(0)));
+            onSetup.Block.Actions.Add(new NewInstanceAction(CapacitorClass.Class, itemGroup, new NumberValue<int>(capacity), slimefunItemStackValue, recipeType, new ArrayValue(ItemStackClass.Class, recipe)).Invoke(GuguSlimefunItemClass.Register, new ParameterValue(0)));
         }
 
         return [generated];
