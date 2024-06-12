@@ -11,7 +11,7 @@ namespace rsc_converter.Classes.Yaml;
 
 public static class RecipeReader
 {
-    public static IValue[] ReadRecipe(this YamlNode yaml, DirectoryInfo directory, ClassDefinition itemsClass)
+    public static IValue[] ReadRecipe(this YamlNode yaml, DirectoryInfo directory, ClassDefinition? itemsClass = null)
     {
         IValue[] recipe = new IValue[9];
 
