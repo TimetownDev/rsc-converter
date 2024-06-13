@@ -32,6 +32,7 @@ namespace rsc_converter
             session.ClassGenerators.Add(new MenusGenerator());
             session.ClassGenerators.Add(new MachinesGenerator());
             session.ClassGenerators.Add(new GeneratorsGenerator());
+            session.ClassGenerators.Add(new SolarGeneratorsGenerator());
             session.ClassGenerators.Add(new PluginMainGenerator());
             session.FileGenerators.Add(new PluginYamlGenerator());
             session.Build();
